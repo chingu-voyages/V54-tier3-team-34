@@ -13,6 +13,10 @@ in your `readme` feel free to replace the text we've provided here.
 
 > Own it & Make it your Own!
 
+## Our Workflow
+
+When interacting with the repo, we'll follow [Chingu's take on git flow](https://github.com/chingu-voyages/Handbook/blob/main/docs/resources/techresources/gitgithub.md#the-workflow)
+
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.
