@@ -42,6 +42,6 @@ coding!
 - Greg Minezzi: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregoryminezzi)
 - Anita Boakye-Yiadom: [GitHub](https://github.com/AnitaBoakye) / [LinkedIn](https://linkedin.com/in/anitaboakyeyiadom)
 - Anas Maddah: [GitHub](https://github.com/snowbytes) / [LinkedIn - TBD](https://linkedin.com/)
-- Teammate name #5: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
+- Abdulsamad Yusuf: [GitHub](https://github.com/samad13) / [LinkedIn](https://www.linkedin.com/in/abdulsamad-yusuf-ba006)
 - Teammate name #6: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Teammate name #7: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
