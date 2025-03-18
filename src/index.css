@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@theme {
+  --font-tektur: Tektur, sans-serif;
+}
