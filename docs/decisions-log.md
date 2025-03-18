@@ -16,7 +16,7 @@
 |:----------------|:---------|
 | Project Backlog | Trello   |
 | Wireframing     | TBD      |
-| Deployment      | TBD      |
+| Deployment      | Render   |
 
 ## Languages, libraries and frameworks
 
@@ -26,3 +26,6 @@
 | BE Language  | Javascript (node) |
 | FE Framework | React             |
 | BE Framework | Express           |
+| Linting      | eslint            |
+| Formatting   | prettier          |
+| Testing      | TBD               |
