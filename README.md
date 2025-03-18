@@ -17,12 +17,10 @@ in your `readme` feel free to replace the text we've provided here.
 
 When interacting with the repo, we'll follow [Chingu's take on git flow](https://github.com/chingu-voyages/Handbook/blob/main/docs/resources/techresources/gitgithub.md#the-workflow)
 
-## Team Documents
+## Team Documents & Links
 
-You may find these helpful as you work together to organize your project.
-
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+- [Meeting notes](./docs/meeting-notes.md)
+- [Team Decision Log](./docs/decision-log.md)
 
 Meeting Agenda templates (located in the `/docs` directory in this repo):
 
@@ -44,5 +42,4 @@ coding!
 - Anas Maddah: [GitHub](https://github.com/snowbytes) / [LinkedIn - TBD](https://linkedin.com/)
 - Abdulsamad Yusuf: [GitHub](https://github.com/samad13) / [LinkedIn](https://www.linkedin.com/in/abdulsamad-yusuf-ba006)
 - Kosisochukwu Azubogu: [GitHub](https://github.com/azubogukosiso) / [LinkedIn](https://linkedin.com/in/azubogu-kosisochukwu)
-- Teammate name #7: [GitHub](https://github.com/ghaccountname) / [LinkedIn](https://linkedin.com/in/liaccountname)
 - Pat Okwu: [GitHub](https://github.com/SnowmanP423)
