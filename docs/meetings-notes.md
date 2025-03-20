@@ -2,6 +2,65 @@
 
 > A log for the notes summarizing our meetings
 
+## Sprint 3 - Collaboration Meeting
+
+> 18th March 2025 / 11:00 PM GMT
+
+**Attendees**:
+
+- Anas
+- Kosiso
+- Rafael
+
+**Agenda**:
+
+- [Defining our workflow](https://trello.com/c/ExDGf9Ya/26-defining-our-workflow):
+  - Coding standards (Done)
+  - git workflow (Done)
+  - Branch/commit conventions (Done)
+  - Deployment platform (Done)
+  - Recurring meeting times (TBD)
+- [Drafting our definition of done](https://trello.com/c/Keu8HEq3/31-creating-our-definition-of-done) (Incomplete)
+
+**Notes**:
+
+1. On coding standards - This is v1, and may be updated:
+
+   - Linting + formatting handled by tools (eslint/prettier)
+      - git hooks to automate it locally on pre-commit
+      - CI **is not required as of now** to automate it on the remote repo
+   - Testing encouraged but not required: While we recognize its necessity, We'll offload that responsibility to those who want to learn it and those who are already comfortable with it.
+   - Variable names clear, descriptive, and made of words
+   - errors and special cases handled
+   - Validation handled
+   - docs (including readme) updated to reflect new changes
+   - Accessibility basics required for HTML:
+      - design is responsive
+      - html is semantic
+      - navigation works with keyboard only
+      - alt text is present when applicable
+      - forms are accessible
+      - headings are properly used
+2. On git workflow: We'll follow [Chingu's workflow](https://github.com/chingu-voyages/Handbook/blob/main/docs/resources/techresources/gitgithub.md#the-workflow)
+3. On naming conventions:
+
+   - commits to follow the mandatory parts of the [**conventional commits** spec](https://www.conventionalcommits.org/en/v1.0.0/): Link to a [cheatsheet](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13) for easy reference.
+   - branch names to use the types of conventional commits following the format `<type>/<name>` (e.g feat/dark-mode)
+
+4. On deployment platform:
+
+   - [Render](https://render.com/) for both dev and prod environments
+
+**Action Items**:
+
+- Update our decisions log with the relevant parts
+- Include our coding standards in the definition of done
+- Choose testing tools
+- Choose recurring times for sprint planning, review, and retrospective
+
+**Resources**:
+[accessibility guidelines for developers](https://daily.dev/blog/10-web-accessibility-guidelines-for-developers)
+
 ## Sprint 1 - Kickoff Meeting
 
 > 6th March 2025 / 2:00 PM GMT
