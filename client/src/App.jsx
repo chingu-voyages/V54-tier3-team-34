@@ -14,6 +14,21 @@ function App() {
             for
           </div>
 {/* input area */}
+{/* if there is output */}
+<div className="mx-1 mt-5 flex-1 border text-sm border-white bg-green-500/20 p-3 text-amber-50 tracking-wider">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+            consectetur quidem perferendis sint! Expedita ullam nemo esse officiis
+            sunt. Nihil consequuntur accusamus minima voluptatibus corrupti saepe
+            dolorem assumenda voluptatum praesentium quasi quae voluptate hic et
+            similique eaque voluptates totam mollitia sapiente iste, libero vero!
+            Sapiente beatae minus sequi omnis quaerat! Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Voluptates consectetur quidem
+            perferendis sint! Expedita ullam nemo esse officiis sunt. Nihil
+            consequuntur accusamus minima voluptatibus corrupti saepe dolorem
+            assumenda voluptatum praesentium quasi quae voluptate hic et similique
+            eaque voluptates totam mollitia sapiente iste, libero vero! Sapiente
+            beatae minus sequi omnis quaerat!
+          </div>
 <div class="relative mx-1 mt-5 p-1">
             <textarea
               class="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:pb-2 valid:outline valid:outline-green-500 focus:pt-2 focus:pb-18 focus:outline focus:outline-green-500"
@@ -47,6 +62,7 @@ function App() {
             <span>⬠</span>
             <span>⬠</span>
             <span className="mt-2 text-2xl">→</span>
+          </div>
           </div>
          {/* initial button */} 
         {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
@@ -110,7 +126,7 @@ function App() {
             <div>© 2025 Chingu. All rights reserved.</div>
           </div>
         </footer>
-</div>
+
 
     </div>
   );
