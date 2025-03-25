@@ -48,7 +48,9 @@ function App() {
             <span>⬠</span>
             <span className="mt-2 text-2xl">→</span>
           </div>
-
+        <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
+          generate
+        </button>
 </div>
 
     </div>
