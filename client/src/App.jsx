@@ -1,12 +1,15 @@
+import { useState } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
+import Footer from "./components/Footer";
 
 function App() {
+
   return (
     <div class="flex min-h-screen flex-col items-center gap-5 bg-black">
-<Header />
+      <Header />
       <div className="w-full max-w-[1000px] flex-1 border border-green-500">
         <div className="bg-green-500 p-3">
           A <strong>persona</strong> describes who the result will be tailored
@@ -51,57 +54,7 @@ function App() {
         <button className="penta animate-rotate h-12 w-12 bg-green-500"></button>
       </div>
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
-        <div className="bg-green-500 pt-5 pb-2">
-          <div className="grid grid-cols-2">
-            <ul className="list-none">
-              <li>
-                <a href="#" className="text-white">
-                  Anita Boakye-Yiadom
-                </a>
-                - Scrum Master
-              </li>
-              <li>
-                <a href="" className="text-white">
-                  Anas Maddah
-                </a>
-                - Developer
-              </li>
-              <li>
-                <a href="" className="text-white">
-                  Greg Minezzi
-                </a>
-                - Developer
-              </li>
-              <li>
-                <a href="" className="text-white">
-                  Pat Okwu
-                </a>
-                - Product Owner
-              </li>
-            </ul>
-            <ul className="list-none">
-              <li>
-                <a href="" className="text-white">
-                  Rafael Vecchi
-                </a>
-                - Developer
-              </li>
-              <li>
-                <a href="" className="text-white">
-                  Abdulsamad Yusuf
-                </a>
-                - Developer
-              </li>
-              <li>
-                <a href="" className="text-white">
-                  Kosiso
-                </a>
-                - Developer
-              </li>
-            </ul>
-          </div>
-          <div>© 2025 Chingu. All rights reserved.</div>
-        </div>
+        <Footer />
       </footer>
     </div>
   );
