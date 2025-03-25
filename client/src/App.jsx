@@ -16,6 +16,8 @@ function App() {
   // clear individual textArea
   const handleClear = () => {
     setPersona("")
+    console.log("clear");
+    
   }
 
   return (
