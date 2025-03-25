@@ -57,6 +57,59 @@ function App() {
           <div className="absolute text-white z-10 mt-[10px] ml-[12px] text-xs leading-[10px]"><div>gen</div><div>er</div>ate</div>
           <button className="penta animate-rotate h-12 w-12 bg-green-500 "></button>
         </div>
+        <footer className="hidden w-full translate-y-full bg-black text-center md:block">
+          <div className="bg-green-500 pt-5 pb-2">
+            <div className="grid grid-cols-2">
+              <ul className="list-none">
+                <li>
+                  <a href="#" className="text-white">
+                    Anita Boakye-Yiadom
+                  </a>
+                  - Scrum Master
+                </li>
+                <li>
+                  <a href="" className="text-white">
+                    Anas Maddah
+                  </a>
+                  - Developer
+                </li>
+                <li>
+                  <a href="" className="text-white">
+                    Greg Minezzi
+                  </a>
+                  - Developer
+                </li>
+                <li>
+                  <a href="" className="text-white">
+                    Pat Okwu
+                  </a>
+                  - Product Owner
+                </li>
+              </ul>
+              <ul className="list-none">
+                <li>
+                  <a href="" className="text-white">
+                    Rafael Vecchi
+                  </a>
+                  - Developer
+                </li>
+                <li>
+                  <a href="" className="text-white">
+                    Abdulsamad Yusuf
+                  </a>
+                  - Developer
+                </li>
+                <li>
+                  <a href="" className="text-white">
+                    Kosiso
+                  </a>
+                  - Developer
+                </li>
+              </ul>
+            </div>
+            <div>© 2025 Chingu. All rights reserved.</div>
+          </div>
+        </footer>
 </div>
 
     </div>
