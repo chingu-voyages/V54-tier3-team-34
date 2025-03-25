@@ -1,16 +1,12 @@
 import Button from "./components/Button";
+import Header from "./components/Header";
 import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 
 function App() {
   return (
     <div class="flex min-h-screen flex-col items-center gap-5 bg-black">
-      <div className="flex flex-col items-center justify-center">
-        <h1 class="mt-10 text-center text-4xl text-green-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
-          Penta AI
-        </h1>
-        <div className="text-xs text-green-500">March 24, 2025</div>
-      </div>
+<Header />
       <div className="w-full max-w-[1000px] flex-1 border border-green-500">
         <div className="bg-green-500 p-3">
           A <strong>persona</strong> describes who the result will be tailored
