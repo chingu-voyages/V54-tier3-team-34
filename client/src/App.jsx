@@ -6,28 +6,41 @@ import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
 
 function App() {
+  const [persona, setPersona] = useState("");
+
+  // users submits item.  saved to state, moves to next input form
+  const handleContinue = () => {
+    alert(persona)
+  }
+
+  // clear individual textArea
+  const handleClear = () => {
+    setPersona("")
+  }
 
   return (
-    <div class="flex min-h-screen flex-col items-center gap-5 bg-black">
+    <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
-      <div className="w-full max-w-[1000px] flex-1 border border-green-500">
+      <div className="w-full max-w-[1000px] flex-1  border-green-500">
         <div className="bg-green-500 p-3">
           A <strong>persona</strong> describes who the result will be tailored
           for
         </div>
         {/* if there is output */}
-        <OutputField />
-        <div class="relative mx-1 mt-5 p-1">
+        {/* <OutputField /> */}
+        <div className="relative mx-1 mt-5 p-1">
           <TextArea
             title={"persona"}
             placeholder={
               "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or Data Scientist who is at the beginning of your career and is looking to apply what you've learned to build practical experience to help you get noticed in the job market."
             }
+            inputValue={persona}
+            handleChange={setPersona}
           />
 
           <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
-            <Button text="clear" />
-            <Button text="continue" />
+            <Button text="clear" onClick={handleClear}/>
+            <Button text="continue" onClick={handleContinue} />
           </div>
         </div>
 
