@@ -39,7 +39,15 @@ function App() {
             </div>
           
           </div>
-
+          <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
+            <span className="mt-2 text-2xl">←</span>
+            <span className="text-2xl">⬟</span>
+            <span>⬠</span>
+            <span>⬠</span>
+            <span>⬠</span>
+            <span>⬠</span>
+            <span className="mt-2 text-2xl">→</span>
+          </div>
 
 </div>
 
