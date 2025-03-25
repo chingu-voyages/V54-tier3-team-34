@@ -48,9 +48,15 @@ function App() {
             <span>⬠</span>
             <span className="mt-2 text-2xl">→</span>
           </div>
-        <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
+         {/* initial button */} 
+        {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
           generate
-        </button>
+        </button> */}
+        {/* output already visible */}
+        <div className="fixed right-3 bottom-3">
+          <div className="absolute text-white z-10 mt-[10px] ml-[12px] text-xs leading-[10px]"><div>gen</div><div>er</div>ate</div>
+          <button className="penta animate-rotate h-12 w-12 bg-green-500 "></button>
+        </div>
 </div>
 
     </div>
