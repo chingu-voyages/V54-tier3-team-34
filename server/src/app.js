@@ -1,10 +1,10 @@
-import express from 'express'
+import express from "express";
 
-const app = express()
+const app = express();
 
 app.use(function logRequests(req, _, next) {
-    console.info(`${req.method} initiated on ${req.path}`)
-    next()
-})
+  console.info(`${req.method} initiated on ${req.path}`);
+  next();
+});
 
-export default app
+export default app;
