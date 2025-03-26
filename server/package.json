@@ -5,6 +5,7 @@
   "type": "module",
   "description": "",
   "scripts": {
+    "start": "node ./index.js",
     "dev": "dotenvx run -- nodemon ./index.js",
     "format": "prettier --write .",
     "lint": "eslint ."
