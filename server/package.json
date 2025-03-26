@@ -4,6 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "description": "",
+  "engines": {
+    "node": ">=16.9.0"
+  },
   "scripts": {
     "start": "node ./index.js",
     "dev": "dotenvx run -- nodemon ./index.js",
