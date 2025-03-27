@@ -61,12 +61,13 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3">
-        <div className="absolute z-10 mt-[10px] ml-[12px] text-xs leading-[10px] text-white">
+      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center">
+        <div className="absolute z-10  text-xs leading-[10px] text-white">
           <div>gen</div>
           <div>er</div>ate
         </div>
-        <button className="penta animate-rotate h-12 w-12 bg-green-500"></button>
+        <div className="penta animate-rotate h-13 w-13 bg-black absolute"></div>
+        <button className="penta animate-rotate h-12 w-12 bg-green-500 relative"></button>
       </div>
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
