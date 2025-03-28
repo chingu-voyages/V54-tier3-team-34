@@ -29,14 +29,14 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
       {steps.map((step, i) => {
         if (i === stepNumber)
           return (
-            <div key={i} className="translate-y-[1.5px] text-2xl" onClick={() => handleClick(i)}>
+            <div key={i} className="translate-y-[1.5px] text-2xl cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" onClick={() => handleClick(i)}>
               <div>⬟</div>
               <div className="absolute font-bold text-xs top-[10px] left-[8px] text-black">{i+1}</div>
             </div>
           );
         else
           return (
-            <div key={i} className="relative" onClick={() => handleClick(i)}>
+            <div key={i} className="relative cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]" onClick={() => handleClick(i)}>
               <div>⬠</div>
               {/* <div className="absolute text-xs top-4 left-2 text-white">{i + 1}</div> */}
             </div>
