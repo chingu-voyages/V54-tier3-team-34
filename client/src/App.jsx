@@ -63,6 +63,7 @@ function App() {
               text="continue"
               onClick={handleContinue}
               name={currentStep.name}
+              disabled={stepNumber === 4}
             />
           </div>
         </div>
