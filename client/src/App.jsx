@@ -5,6 +5,7 @@ import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
 import { steps } from "./steps";
+import ProgressBar from "./ProgressBar";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -39,17 +40,7 @@ function App() {
     console.log(formData);
   };
 
-  // move steps back
-  const handleBack = () => {
-    if(stepNumber === 0) return;
-    setStepNumber(prev => prev-=1);
-  }
 
-  // move steps forward
-  const handleForward = () => {
-    if(stepNumber === 4) return;
-    setStepNumber(prev => prev+=1);
-  }
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
@@ -81,14 +72,7 @@ function App() {
           </div>
         </div>
 
-        <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
-          <span className={`mt-2 text-2xl cursor-pointer hover:text-white ${!stepNumber && "invisible"}`} onClick={handleBack}>←</span>
-          {steps.map((step, i) => {
-            if(i === stepNumber) return (<span className="text-2xl translate-y-0.5">⬟</span>)
-            else return (<span>⬠</span>)
-          })}
-          <span className={`mt-2 text-2xl cursor-pointer hover:text-white ${stepNumber === 4 && "invisible"}`} onClick={handleForward}>→</span>
-        </div>
+<ProgressBar steps={steps} setStepNumber={setStepNumber} stepNumber={stepNumber} />
       </div>
       {/* initial button */}
       {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
