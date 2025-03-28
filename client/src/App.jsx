@@ -4,45 +4,61 @@ import Header from "./components/Header";
 import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
+import { steps } from "./steps";
 
 function App() {
-  const [persona, setPersona] = useState("");
+  const [formData, setFormData] = useState({
+    persona: "",
+    context: "",
+    task: "",
+    output: "asdf",
+    constraint: "",
+  });
+  const [stepNumber, setStepNumber] = useState(0);
+  const [currentStep, setCurrentStemp] = useState(steps[2]);
 
   // users submits item.  saved to state, moves to next input form
   const handleContinue = () => {
-    alert(persona)
-  }
+    alert(formData[currentStep.name]);
+  };
 
   // clear individual textArea
-  const handleClear = () => {
-    setPersona("")
+  const handleClear = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: "" }));
     console.log("clear");
-    
-  }
+  };
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    console.log(formData);
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
-      <div className="w-full max-w-[1000px] flex-1  border-green-500">
-        <div className="bg-green-500 p-3">
-          A <strong>persona</strong> describes who the result will be tailored
-          for
-        </div>
+      <div className="w-full max-w-[1000px] flex-1 border-green-500">
+        <div className="bg-green-500 p-3">{currentStep.description}</div>
         {/* if there is output */}
         {/* <OutputField /> */}
         <div className="relative mx-1 mt-5 p-1">
           <TextArea
-            title={"persona"}
-            placeholder={
-              "You are a Product Owner, Scrum Master, UI/UX Designer, Web Developer, or Data Scientist who is at the beginning of your career and is looking to apply what you've learned to build practical experience to help you get noticed in the job market."
-            }
-            inputValue={persona}
-            handleChange={setPersona}
+            title={currentStep.name}
+            placeholder={currentStep.example}
+            inputValue={formData[currentStep.name]}
+            handleChange={handleChange}
           />
 
           <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
-            <Button text="clear" onClick={handleClear}/>
-            <Button text="continue" onClick={handleContinue} />
+            <Button
+              text="clear"
+              onClick={handleClear}
+              name={currentStep.name}
+            />
+            <Button
+              text="continue"
+              onClick={handleContinue}
+              name={currentStep.name}
+            />
           </div>
         </div>
 
@@ -62,12 +78,12 @@ function App() {
       </button> */}
       {/* output already visible */}
       <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center">
-        <div className="absolute z-10  text-xs leading-[10px] text-white">
+        <div className="absolute z-10 text-xs leading-[10px] text-white">
           <div>gen</div>
           <div>er</div>ate
         </div>
-        <div className="penta animate-rotate h-13 w-13 bg-black absolute"></div>
-        <button className="penta animate-rotate h-12 w-12 bg-green-500 relative"></button>
+        <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
+        <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
       </div>
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />

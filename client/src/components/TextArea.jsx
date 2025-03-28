@@ -9,7 +9,8 @@ export default function TextArea({title, placeholder, inputValue, handleChange }
         className="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
         // placeholder={placeholder}
         value={inputValue}
-        onChange={(e) => handleChange(e.target.value)}
+        name={title}
+        onChange={handleChange}
         required
       ></textarea>
       <div className="absolute top-2 right-2 cursor-pointer text-white" onClick={() => setTooltip(prev => !prev)}>
