@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import OutputField from "./components/OutputField";
@@ -11,15 +11,20 @@ function App() {
     persona: "",
     context: "",
     task: "",
-    output: "asdf",
+    output: "",
     constraint: "",
   });
   const [stepNumber, setStepNumber] = useState(0);
-  const [currentStep, setCurrentStemp] = useState(steps[2]);
+  const [currentStep, setCurrentStep] = useState(steps[0]);
+
+  // change currentStep everytime stepNumber changes
+  useEffect(() => {
+    setCurrentStep(steps[stepNumber]);
+  }, [stepNumber]);
 
   // users submits item.  saved to state, moves to next input form
   const handleContinue = () => {
-    alert(formData[currentStep.name]);
+    setStepNumber((prev) => (prev += 1));
   };
 
   // clear individual textArea
