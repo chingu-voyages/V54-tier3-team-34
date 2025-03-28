@@ -48,7 +48,7 @@ function App() {
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         <div className="min-h-24 bg-green-500 p-3">
-          {currentStep.description}
+          {currentStep.description.split(" ").map(word => word === currentStep.name ? <strong>{word} </strong> : word + " ")}
         </div>
         {/* if there is output */}
         {/* <OutputField /> */}
@@ -86,7 +86,7 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center" onClick={handleSubmit}>
+      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center cursor-pointer" onClick={handleSubmit}>
         <div className="absolute z-10 text-xs leading-[10px] text-white">
           <div>gen</div>
           <div>er</div>ate
