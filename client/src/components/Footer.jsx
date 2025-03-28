@@ -23,14 +23,14 @@ export default function Footer() {
             </a>
             - Developer
           </li>
+        </ul>
+        <ul className="list-none">
           <li>
             <a href="" className="text-white">
               Pat Okwu
             </a>
             - Product Owner
           </li>
-        </ul>
-        <ul className="list-none">
           <li>
             <a href="" className="text-white">
               Rafael Vecchi
@@ -43,15 +43,9 @@ export default function Footer() {
             </a>
             - Developer
           </li>
-          <li>
-            <a href="" className="text-white">
-              Kosiso
-            </a>
-            - Developer
-          </li>
         </ul>
       </div>
-      <div>© 2025 Chingu. All rights reserved.</div>
+      <div className="mt-3"><a href="https://github.com/chingu-voyages/V54-tier3-team-34" className="text-white font-bold">GitHub </a>© 2025 Team 54-3-34. All rights reserved. </div>
     </div>
   );
 }

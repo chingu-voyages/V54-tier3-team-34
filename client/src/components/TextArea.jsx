@@ -16,7 +16,7 @@ export default function TextArea({title, placeholder, inputValue, handleChange }
         <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-green-500">
           {!tooltip ? "?" : "X"}
         </div>
-        <div className={`pointer-events-none absolute right-5 z-100 min-w-[300px] bg-green-500 p-3 text-sm tracking-wider opacity-0 transition-all peer-hover:opacity-100 ${tooltip && "opacity-100"}`}>
+        <div className={`pointer-events-none absolute right-5 z-100 min-w-[300px] bg-green-500 p-3 text-xs tracking-wider opacity-0 transition-all peer-hover:opacity-100 ${tooltip && "opacity-100"}`}>
           {placeholder}
         </div>
       </div>
