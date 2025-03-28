@@ -33,10 +33,23 @@ function App() {
     console.log("clear");
   };
 
+  // update object on input change
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     console.log(formData);
   };
+
+  // move steps back
+  const handleBack = () => {
+    if(stepNumber === 0) return;
+    setStepNumber(prev => prev-=1);
+  }
+
+  // move steps forward
+  const handleForward = () => {
+    if(stepNumber === 4) return;
+    setStepNumber(prev => prev+=1);
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
@@ -69,13 +82,13 @@ function App() {
         </div>
 
         <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
-          <span className="mt-2 text-2xl">←</span>
+          <span className="mt-2 text-2xl cursor-pointer hover:text-white" onClick={handleBack}>←</span>
           <span className="text-2xl">⬟</span>
           <span>⬠</span>
           <span>⬠</span>
           <span>⬠</span>
           <span>⬠</span>
-          <span className="mt-2 text-2xl">→</span>
+          <span className="mt-2 text-2xl cursor-pointer hover:text-white" onClick={handleForward}>→</span>
         </div>
       </div>
       {/* initial button */}
