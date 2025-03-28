@@ -1,4 +1,4 @@
-import { AiService } from "./AiService.jsx";
+import { AiService } from "./components/AiService/AiService.jsx";
 
 function App() {
   return (
