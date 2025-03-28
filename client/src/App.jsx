@@ -5,7 +5,7 @@ import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
 import { steps } from "./steps";
-import ProgressBar from "./ProgressBar";
+import ProgressBar from "./components/ProgressBar";
 
 function App() {
   const [formData, setFormData] = useState({

@@ -13,6 +13,11 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
     setStepNumber((prev) => (prev += 1));
   };
 
+  // handle click to move directly to step
+  const handleClick = (number) => {
+    setStepNumber(number)
+  }
+
   return (
     <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
       <span
@@ -24,14 +29,14 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
       {steps.map((step, i) => {
         if (i === stepNumber)
           return (
-            <div key={i} className="translate-y-[1.5px] text-2xl">
+            <div key={i} className="translate-y-[1.5px] text-2xl" onClick={() => handleClick(i)}>
               <div>⬟</div>
               <div className="absolute font-bold text-xs top-[10px] left-[8px] text-black">{i+1}</div>
             </div>
           );
         else
           return (
-            <div key={i} className="relative">
+            <div key={i} className="relative" onClick={() => handleClick(i)}>
               <div>⬠</div>
               {/* <div className="absolute text-xs top-4 left-2 text-white">{i + 1}</div> */}
             </div>
