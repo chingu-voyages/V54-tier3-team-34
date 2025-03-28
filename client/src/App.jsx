@@ -31,22 +31,25 @@ function App() {
   // clear individual textArea
   const handleClear = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: "" }));
-    console.log("clear");
   };
 
   // update object on input change
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log(formData);
   };
 
-
+  // handle submit form
+  const handleSubmit = () => {
+    console.log(formData)
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="bg-green-500 p-3 min-h-24">{currentStep.description}</div>
+        <div className="min-h-24 bg-green-500 p-3">
+          {currentStep.description}
+        </div>
         {/* if there is output */}
         {/* <OutputField /> */}
         <div className="relative mx-1 mt-5 p-1">
@@ -72,14 +75,18 @@ function App() {
           </div>
         </div>
 
-<ProgressBar steps={steps} setStepNumber={setStepNumber} stepNumber={stepNumber} />
+        <ProgressBar
+          steps={steps}
+          setStepNumber={setStepNumber}
+          stepNumber={stepNumber}
+        />
       </div>
       {/* initial button */}
       {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center">
+      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center" onClick={handleSubmit}>
         <div className="absolute z-10 text-xs leading-[10px] text-white">
           <div>gen</div>
           <div>er</div>ate
