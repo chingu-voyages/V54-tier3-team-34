@@ -55,7 +55,7 @@ function App() {
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="bg-green-500 p-3">{currentStep.description}</div>
+        <div className="bg-green-500 p-3 min-h-24">{currentStep.description}</div>
         {/* if there is output */}
         {/* <OutputField /> */}
         <div className="relative mx-1 mt-5 p-1">
@@ -82,13 +82,12 @@ function App() {
         </div>
 
         <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
-          <span className="mt-2 text-2xl cursor-pointer hover:text-white" onClick={handleBack}>←</span>
-          <span className="text-2xl">⬟</span>
-          <span>⬠</span>
-          <span>⬠</span>
-          <span>⬠</span>
-          <span>⬠</span>
-          <span className="mt-2 text-2xl cursor-pointer hover:text-white" onClick={handleForward}>→</span>
+          <span className={`mt-2 text-2xl cursor-pointer hover:text-white ${!stepNumber && "invisible"}`} onClick={handleBack}>←</span>
+          {steps.map((step, i) => {
+            if(i === stepNumber) return (<span className="text-2xl translate-y-0.5">⬟</span>)
+            else return (<span>⬠</span>)
+          })}
+          <span className={`mt-2 text-2xl cursor-pointer hover:text-white ${stepNumber === 4 && "invisible"}`} onClick={handleForward}>→</span>
         </div>
       </div>
       {/* initial button */}
