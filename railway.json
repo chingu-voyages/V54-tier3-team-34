@@ -1,0 +1,18 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+
+  "build": {
+    "nixpacksPlan": {
+      "providers": ["...", "node"],
+      "phases": {
+        "install": {
+          "dependsOn": ["setup"],
+          "cmds": [
+            "cd client && npm ci --omit=dev",
+            "cd server && npm ci --omit=dev"
+          ]
+        }
+      }
+    }
+  }
+}
