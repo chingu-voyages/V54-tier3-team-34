@@ -3,3 +3,27 @@
 @theme {
   --font-tektur: Tektur, sans-serif;
 }
+
+.penta{
+  clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+}
+.penta-border {
+  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  position: absolute;
+  width: 52px; /* Slightly larger than .penta */
+  height: 52px;
+  background-color: black; /* Border color */
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate {
+  animation: rotate 8s linear infinite;
+}
