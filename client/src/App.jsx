@@ -17,6 +17,7 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
+  const [showAiService, setShowAiService] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
 
   // change currentStep everytime stepNumber changes
@@ -142,6 +143,7 @@ function App() {
         <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
         <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
       </div>
+      {showAiService && <AiService formData={formData} />}      
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
