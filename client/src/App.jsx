@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
-import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
-import { steps } from "./steps";
 import ProgressBar from "./components/ProgressBar";
+import { AiService } from "./components/AiService/AiService";
+import OutputField from "./components/OutputField";
+import { steps } from "./steps";
+import { GoogleGenAI } from "@google/genai";
+
 
 function App() {
   const [formData, setFormData] = useState({
@@ -17,9 +20,9 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
-  const [showAiService, setShowAiService] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  
+  const [aiResponse, setAiResponse] = useState("");
+
   const [errorMessages, setErrorMessages] = useState({});
 
   // change currentStep everytime stepNumber changes
@@ -29,7 +32,7 @@ function App() {
 
   // users submits item.  saved to state, moves to next input form
   const handleContinue = () => {
-    setStepNumber((prev) => (prev += 1));
+    setStepNumber((prev) => prev + 1);
   };
 
   // clear individual textArea
@@ -80,6 +83,17 @@ function App() {
     console.log("Submitted success - communicate with API HERE");
   };
 
+  const geminiApiHandler = async (formData) => {
+    const ai = new GoogleGenAI({
+      apiKey: import.meta.env.VITE_GEMINI_API_KEY,
+    });
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: `Generate a response for the following prompt built using the Pentagram Framework for prompt engineering: Persona:{${formData.persona}}, Context:{${formData.context}}, Task:{${formData.task}}, Output:{${formData.output}}, Constraint:{${formData.constraint}}.`,
+    });
+    return response.text;
+  };
+
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
@@ -95,8 +109,16 @@ function App() {
               ),
             )}
         </div>
-        {/* if there is output */}
-        {/* <OutputField /> */}
+        {isSubmitted && (
+        <AiService
+          apiHandler={geminiApiHandler}
+          formData={formData}
+          isSubmitted={isSubmitted}
+          setIsSubmitted={setIsSubmitted}
+          setResponse={setAiResponse}
+        />
+      )}
+      {aiResponse && <OutputField response={aiResponse} />}
         <div className="relative mx-1 mt-5 p-1">
           <TextArea
             title={currentStep.name}
@@ -105,13 +127,8 @@ function App() {
             handleChange={handleChange}
             handleKeyDown={handleKeyDown}
           />
-
           <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
-            <Button
-              text="clear"
-              onClick={handleClear}
-              name={currentStep.name}
-            />
+            <Button text="clear" onClick={handleClear} name={currentStep.name} />
             <Button
               text="continue"
               onClick={handleContinue}
@@ -145,11 +162,12 @@ function App() {
         <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
         <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
       </div>
-      {showAiService && <AiService formData={formData} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />}      <footer className="hidden w-full translate-y-full bg-black text-center md:block">
+
+      <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
     </div>
   );
-} 
+}
 
 export default App;
