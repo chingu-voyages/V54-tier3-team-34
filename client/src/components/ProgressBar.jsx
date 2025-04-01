@@ -36,9 +36,9 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
           );
         else
           return (
-            <div key={i} className="relative cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]" onClick={() => handleClick(i)}>
+            <div key={i} className="group relative cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]" onClick={() => handleClick(i)}>
               <div>⬠</div>
-              {/* <div className="absolute text-xs top-4 left-2 text-white">{i + 1}</div> */}
+              <div className="absolute text-xs top-[16px] left-[9px] text-white opacity-0 group-hover:opacity-100 transition-all">{i + 1}</div>
             </div>
           );
       })}

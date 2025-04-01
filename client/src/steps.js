@@ -6,7 +6,7 @@ export const steps = [
     },
     {
         name: "context",
-        description: "This provides background information to help the AI tool generate a result that best fits your needs.",
+        description: "The context provides background information to help the AI tool generate a result that best fits your needs.",
         example: "The information provided should assume that I am a Frontend Web Developer who understands the technical aspects of what is needed to build websites. But, I have not worked in team projects with individuals in different roles."
     },
     {
