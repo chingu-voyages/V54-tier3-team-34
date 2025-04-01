@@ -102,7 +102,7 @@ function App() {
               text="continue"
               onClick={handleContinue}
               name={currentStep.name}
-              disabled={stepNumber === 4 || !formData[currentStep.name]}
+              disabled={stepNumber === 4}
             />
           </div>
         </div>
@@ -112,6 +112,7 @@ function App() {
           setStepNumber={setStepNumber}
           stepNumber={stepNumber}
           errormessage={errorMessage}
+          formData={formData}
         />
       </div>
       {/* initial button */}
