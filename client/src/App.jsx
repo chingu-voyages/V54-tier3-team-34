@@ -50,6 +50,7 @@ function App() {
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
   const validateInput = () => {
+    setErrorMessages({})
     const missingData = {};
     // if step isn't filled out, create error object with key and error message
     Object.entries(formData).forEach(([key, value], index) => {
