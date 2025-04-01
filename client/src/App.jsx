@@ -17,7 +17,7 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
-  const [errorMessage, setErrorMessage] = useState([]);
+  const [errorMessages, setErrorMessages] = useState({});
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -41,37 +41,39 @@ function App() {
 
   // click continue button when user hits enter key
   const handleKeyDown = (e) => {
-    if(e.key === "Enter") {
+    if (e.key === "Enter") {
       e.preventDefault();
-      if(stepNumber === 4) return;
+      if (stepNumber === 4) return;
       handleContinue();
     }
-  }
+  };
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
   const validateInput = () => {
-    // setErrorMessage({})
-    
-    Object.entries(formData).forEach(([key,value],index) => {
-      if(!value) {
-        setErrorMessage(prev => ({...prev,[key]: `Step ${index+1}: ${key.slice(0,1).toUpperCase() + key.slice(1)} is requried`}));
+    const missingData = {};
+    // if step isn't filled out, create error object with key and error message
+    Object.entries(formData).forEach(([key, value], index) => {
+      if (!value) {
+        missingData[key] =
+          `Step ${index + 1}: ${key.slice(0, 1).toUpperCase() + key.slice(1)} is requried`;
       }
-    })
-    console.log("ERRORMESSAGE", errorMessage)
-  }
+    });
+    return missingData;
+  };
 
   // handle submit form
   const handleSubmit = (e) => {
     e.preventDefault();
     // run validation function.  if error string is returned, set errorMessage and stop and return
-    validateInput();
-    
-    if(Object.keys(errorMessage)) {
-      console.log("individ", errorMessage)
+    const missingData = validateInput();
+
+    // if there are any error messags in object, add them to state
+    if (Object.keys(missingData).length) {
+      setErrorMessages(missingData);
       return;
     }
-
-    console.log("Submitted")
+    // if no errors - proceed to communicate with API
+    console.log("Submitted success - communicate with API HERE");
   };
 
   return (
@@ -79,7 +81,15 @@ function App() {
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         <div className="min-h-24 bg-green-500 p-3">
-          {currentStep.description.split(" ").map((word,i) => word === currentStep.name ? <strong key={i}>{word} </strong> : word + " ")}
+          {currentStep.description
+            .split(" ")
+            .map((word, i) =>
+              word === currentStep.name ? (
+                <strong key={i}>{word} </strong>
+              ) : (
+                word + " "
+              ),
+            )}
         </div>
         {/* if there is output */}
         {/* <OutputField /> */}
@@ -111,8 +121,8 @@ function App() {
           steps={steps}
           setStepNumber={setStepNumber}
           stepNumber={stepNumber}
-          errormessage={errorMessage}
           formData={formData}
+          errorMessages={errorMessages}
         />
       </div>
       {/* initial button */}
@@ -120,7 +130,10 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" onClick={handleSubmit}>
+      <div
+        className="fixed right-3 bottom-3 z-100 flex cursor-pointer items-center justify-center hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+        onClick={handleSubmit}
+      >
         <div className="absolute z-10 text-xs leading-[10px] text-white">
           <div>gen</div>
           <div>er</div>ate
