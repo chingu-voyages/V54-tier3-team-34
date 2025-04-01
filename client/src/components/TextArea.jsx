@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function TextArea({title, placeholder, inputValue, handleChange }) {
+export default function TextArea({title, placeholder, inputValue, handleChange, handleKeyDown }) {
   const [tooltip, setTooltip] = useState(false);
 
   return (
@@ -11,6 +11,7 @@ export default function TextArea({title, placeholder, inputValue, handleChange }
         value={inputValue}
         name={title}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         required
       ></textarea>
       <div className="absolute top-2 right-2 cursor-pointer text-white" onClick={() => setTooltip(prev => !prev)}>

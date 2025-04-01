@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
+export default function ProgressBar({ steps, stepNumber, setStepNumber, errorMessage }) {
   // move steps back
   const handleBack = () => {
     if (stepNumber === 0) return;
@@ -37,7 +37,7 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber }) {
         else
           return (
             <div key={i} className="group relative cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,1)]" onClick={() => handleClick(i)}>
-              <div>⬠</div>
+              <div className={`${!!errorMessage?.[step.name] ? "text-red-500" : ""}`}>⬠</div>
               <div className="absolute text-xs top-[16px] left-[9px] text-white opacity-0 group-hover:opacity-100 transition-all">{i + 1}</div>
             </div>
           );

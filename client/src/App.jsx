@@ -17,6 +17,7 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
+  const [errorMessage, setErrorMessage] = useState([]);
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -38,9 +39,39 @@ function App() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // click continue button when user hits enter key
+  const handleKeyDown = (e) => {
+    if(e.key === "Enter") {
+      e.preventDefault();
+      if(stepNumber === 4) return;
+      handleContinue();
+    }
+  }
+
+  // check each key and see if there is value, create error message. if all filled out, return empty string
+  const validateInput = () => {
+    // setErrorMessage({})
+    
+    Object.entries(formData).forEach(([key,value],index) => {
+      if(!value) {
+        setErrorMessage(prev => ({...prev,[key]: `Step ${index+1}: ${key.slice(0,1).toUpperCase() + key.slice(1)} is requried`}));
+      }
+    })
+    console.log("ERRORMESSAGE", errorMessage)
+  }
+
   // handle submit form
-  const handleSubmit = () => {
-    console.log(formData)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // run validation function.  if error string is returned, set errorMessage and stop and return
+    validateInput();
+    
+    if(Object.keys(errorMessage)) {
+      console.log("individ", errorMessage)
+      return;
+    }
+
+    console.log("Submitted")
   };
 
   return (
@@ -58,6 +89,7 @@ function App() {
             placeholder={currentStep.example}
             inputValue={formData[currentStep.name]}
             handleChange={handleChange}
+            handleKeyDown={handleKeyDown}
           />
 
           <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
@@ -70,7 +102,7 @@ function App() {
               text="continue"
               onClick={handleContinue}
               name={currentStep.name}
-              disabled={stepNumber === 4}
+              disabled={stepNumber === 4 || !formData[currentStep.name]}
             />
           </div>
         </div>
@@ -79,6 +111,7 @@ function App() {
           steps={steps}
           setStepNumber={setStepNumber}
           stepNumber={stepNumber}
+          errormessage={errorMessage}
         />
       </div>
       {/* initial button */}
