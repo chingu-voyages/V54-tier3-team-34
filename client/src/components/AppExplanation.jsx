@@ -38,7 +38,7 @@ export default function AppExplanation({ setExplanationOpen }) {
   };
 
   const handleNextSlide = () => {
-    if (slide === 5) return;
+    if (slide > 5) return;
     setSlide((prev) => (prev += 1));
   };
   return (
@@ -65,7 +65,7 @@ export default function AppExplanation({ setExplanationOpen }) {
               ←
             </div>
             <div
-              className={`cursor-pointer text-2xl hover:text-white ${slide === 4 && "hidden"}`}
+              className={`cursor-pointer text-2xl hover:text-white ${slide === 5 && "hidden"}`}
               onClick={handleNextSlide}
             >
               →
