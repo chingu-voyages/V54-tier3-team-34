@@ -4,10 +4,9 @@ import Header from "./components/Header";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
 import ProgressBar from "./components/ProgressBar";
-import { AiService } from "./components/AiService/AiService";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
-import { GoogleGenAI } from "@google/genai";
+import { generateWithGemini } from "./ai-model";
 
 
 function App() {
@@ -20,8 +19,9 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [aiResponse, setAiResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
 
 
   // change currentStep everytime stepNumber changes
@@ -45,20 +45,19 @@ function App() {
   };
 
   // handle submit form
-  const handleSubmit = () => {
-    setIsSubmitted(true);
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    try {
+      const response = await generateWithGemini(formData); // we can change this logic later to dinamicly select the AI model
+      setAiResponse(response);
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      setAiResponse("**Error:** Unable to fetch response");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const geminiApiHandler = async (formData) => {
-    const ai = new GoogleGenAI({
-      apiKey: import.meta.env.VITE_GEMINI_API_KEY,
-    });
-    const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: `Generate a response for the following prompt built using the Pentagram Framework for prompt engineering: Persona:{${formData.persona}}, Context:{${formData.context}}, Task:{${formData.task}}, Output:{${formData.output}}, Constraint:{${formData.constraint}}.`,
-    });
-    return response.text;
-  };
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
@@ -69,16 +68,7 @@ function App() {
             word === currentStep.name ? <strong key={i}>{word} </strong> : word + " "
           )}
         </div>
-        {isSubmitted && (
-        <AiService
-          apiHandler={geminiApiHandler}
-          formData={formData}
-          isSubmitted={isSubmitted}
-          setIsSubmitted={setIsSubmitted}
-          setResponse={setAiResponse}
-        />
-      )}
-      {aiResponse && <OutputField response={aiResponse} />}
+        {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
         <div className="relative mx-1 mt-5 p-1">
           <TextArea
             title={currentStep.name}
