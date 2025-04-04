@@ -133,7 +133,7 @@ function App() {
               />
             </div>
           </div>
-          <GenerateButton />
+          <GenerateButton formData={formData}/>
         </form>
 
         <ProgressBar
