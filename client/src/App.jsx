@@ -70,7 +70,7 @@ function App() {
   };
 
   // handle submit form
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // run validation function.  if error string is returned, set errorMessage and stop and return
     const missingData = validateInput();
@@ -150,15 +150,6 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" onClick={handleSubmit}>
-        <div className="absolute z-10 text-xs leading-[10px] text-white">
-          <div>gen</div>
-          <div>er</div>ate
-        </div>
-        <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
-        <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
-      </div>
-
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
