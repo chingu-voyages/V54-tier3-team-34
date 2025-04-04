@@ -4,8 +4,8 @@
   --font-tektur: Tektur, sans-serif;
 }
 
-.penta{
-  clip-path: polygon( 50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
+.penta {
+  clip-path: polygon(50% 0, 100% 38%, 81% 100%, 19% 100%, 0 38%);
 }
 .penta-border {
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
@@ -26,4 +26,24 @@
 
 .animate-rotate {
   animation: rotate 8s linear infinite;
+}
+
+@keyframes grow {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+.animate-grow {
+  animation:
+    grow 1s ease-in-out infinite,
+    rotate 8s linear infinite;
+}
+.animate-grow-text {
+  animation: grow 1s ease-in-out infinite;
 }
