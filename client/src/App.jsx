@@ -81,7 +81,7 @@ function App() {
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="min-h-24 bg-green-500 p-3">
+        <div className="min-h-24 bg-green-500 p-3 m-2">
           {currentStep.description
             .split(" ")
             .map((word, i) =>

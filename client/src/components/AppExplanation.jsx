@@ -57,15 +57,15 @@ export default function AppExplanation({ setExplanationOpen }) {
           <div className="mt-10 text-xs md:mt-24 md:text-base">
             {slides[slide]}
           </div>
-          <div className="absolute bottom-20 flex gap-10 md:bottom-30">
+          <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-white">
             <div
-              className={`cursor-pointer text-2xl hover:text-white ${slide === 0 && "hidden"}`}
+              className={`cursor-pointer text-2xl hover:text-black ${slide === 0 && "invisible"}`}
               onClick={handlePrevSlide}
             >
               ←
             </div>
             <div
-              className={`cursor-pointer text-2xl hover:text-white ${slide === 5 && "hidden"}`}
+              className={`cursor-pointer text-2xl hover:text-black ${slide === 5 && "invisible"}`}
               onClick={handleNextSlide}
             >
               →
