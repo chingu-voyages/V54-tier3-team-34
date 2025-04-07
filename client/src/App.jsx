@@ -69,20 +69,14 @@ function App() {
   // handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // run validation function.  if error string is returned, set errorMessage and stop and return
 
-    //check to make sure all data is present:
     const missingData = validateInput();
-
-    // if there are any error messags in object, add them to state
     if (Object.keys(missingData).length) {
       setErrorMessages(missingData);
       return;
     }
 
     // if all data is present, make api call
-    // if no errors - proceed to communicate with API
-    
     setIsLoading(true);
     try {
       const response = await generateWithGemini(formData); // we can change this logic later to dinamicly select the AI model
@@ -116,8 +110,6 @@ function App() {
         ) : (
           aiResponse && <OutputField response={aiResponse} />
         )}
-        {/* <OutputField /> */}
-        {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
         <form onSubmit={handleSubmit} noValidate>
           <div className="relative mx-1 mt-5 p-1">
             <TextArea
@@ -134,22 +126,15 @@ function App() {
                 name={currentStep.name}
               />
               <Button
-                text="clear"
-                onClick={handleClear}
-                name={currentStep.name}
-              />
-              <Button
                 text="continue"
                 onClick={handleContinue}
                 name={currentStep.name}
                 disabled={stepNumber === 4}
               />
             </div>
-            </div>
           </div>
           <GenerateButton formData={formData} />
         </form>
-
         <ProgressBar
           steps={steps}
           setStepNumber={setStepNumber}
@@ -163,7 +148,6 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
