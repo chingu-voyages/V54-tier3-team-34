@@ -2,6 +2,26 @@ import React, { useState } from "react";
 
 export default function AppExplanation({ setExplanationOpen }) {
   const [slide, setSlide] = useState(0);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      console.log(e.key)
+      if (e.key === "ArrowLeft") {
+        handlePrevSlide();
+      } else if (e.key === "ArrowRight") {
+        handleNextSlide();
+      } else if (e.key === "Escape"){
+        setExplanationOpen(prev => !prev)
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [slide]);
+
   const slides = [
     <p>
       The Pentagram Method is a structured approach to crafting effective AI
