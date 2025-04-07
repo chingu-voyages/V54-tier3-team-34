@@ -37,7 +37,7 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
                 onClick={() => handleClick(i)}
               >
                 <div>⬟</div>
-                <div className="absolute top-[10px] left-[8px] text-xs font-bold text-black">
+                <div className="absolute top-[10px] left-[8px] text-xs font-bold text-dark-text">
                   {i + 1}
                 </div>
               </div>
@@ -51,7 +51,7 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
                 onClick={() => handleClick(i)}
               >
                 <div className="text-primary-green/60">⬟</div>
-                <div className="absolute top-[10px] left-[8px] text-xs font-bold text-black">
+                <div className="absolute top-[10px] left-[8px] text-xs font-bold text-dark-text">
                   {i + 1}
                 </div>
               </div>

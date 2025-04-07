@@ -16,7 +16,7 @@ export default function GenerateButton({ formData }) {
         <div>er</div>ate
       </div>
       <div
-        className={`penta animate-rotate absolute h-13 w-13 bg-black ${allValues && "h-17 w-17 animate-grow"} transition-all duration-500`}
+        className={`penta animate-rotate absolute h-13 w-13 bg-dark-backround ${allValues && "h-17 w-17 animate-grow"} transition-all duration-500`}
       ></div>
       <div
         className={`penta animate-rotate relative h-12 w-12 bg-primary-green ${allValues && "h-16 w-16 animate-grow"} transition-all duration-500`}

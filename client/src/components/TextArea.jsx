@@ -24,7 +24,7 @@ export default function TextArea({title, placeholder, inputValue, handleChange, 
       </div>
       <label
         htmlFor={title}
-        className="pointer-events-none absolute top-0 left-1 m-2 bg-black px-1 text-primary-green transition-all duration-400 peer-valid:-top-[15px] peer-valid:primary-green peer-valid:text-xs peer-valid:text-white-text peer-focus:-top-[15px] peer-focus:bg-primary-green peer-focus:text-xs peer-focus:text-white-text"
+        className="pointer-events-none absolute top-0 left-1 m-2 bg-dark-backround px-1 text-primary-green transition-all duration-400 peer-valid:-top-[15px] peer-valid:primary-green peer-valid:text-xs peer-valid:text-white-text peer-focus:-top-[15px] peer-focus:bg-primary-green peer-focus:text-xs peer-focus:text-white-text"
       >
         {title.slice(0, 1).toUpperCase() + title.slice(1)}
       </label>

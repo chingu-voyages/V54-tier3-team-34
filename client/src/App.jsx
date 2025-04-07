@@ -95,7 +95,7 @@ function App() {
 
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
+    <div className="flex min-h-screen flex-col items-center gap-5 bg-dark-backround">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-primary-green">
         <div className="min-h-24 bg-primary-green p-3">
@@ -150,7 +150,7 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <footer className="hidden w-full translate-y-full bg-black text-center md:block">
+      <footer className="hidden w-full translate-y-full bg-dark-backround text-center md:block">
         <Footer />
       </footer>
     </div>
