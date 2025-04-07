@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
-import OutputField from "./components/OutputField";
 import TextArea from "./components/TextArea";
 import Footer from "./components/Footer";
-import { steps } from "./steps";
 import ProgressBar from "./components/ProgressBar";
+import OutputField from "./components/OutputField";
+import { steps } from "./steps";
+import { generateWithGemini } from "./ai-model";
+
 
 function App() {
   const [formData, setFormData] = useState({
@@ -17,7 +19,10 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
-  const [errorMessages, setErrorMessages] = useState({});
+  const [aiResponse, setAiResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -26,7 +31,7 @@ function App() {
 
   // users submits item.  saved to state, moves to next input form
   const handleContinue = () => {
-    setStepNumber((prev) => (prev += 1));
+    setStepNumber((prev) => prev + 1);
   };
 
   // clear individual textArea
@@ -63,19 +68,28 @@ function App() {
   };
 
   // handle submit form
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     e.preventDefault();
-    // run validation function.  if error string is returned, set errorMessage and stop and return
-    const missingData = validateInput();
+    setIsLoading(true);
 
-    // if there are any error messags in object, add them to state
+    //check to make sure all data is present:
+    const missingData = validateInput();
     if (Object.keys(missingData).length) {
       setErrorMessages(missingData);
       return;
     }
-    // if no errors - proceed to communicate with API
-    console.log("Submitted success - communicate with API HERE");
+    // if all data is present, make api call
+    try {
+      const response = await generateWithGemini(formData); // we can change this logic later to dinamicly select the AI model
+      setAiResponse(response);
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      setAiResponse("**Error:** Unable to fetch response");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
@@ -92,8 +106,7 @@ function App() {
               ),
             )}
         </div>
-        {/* if there is output */}
-        {/* <OutputField /> */}
+        {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
         <div className="relative mx-1 mt-5 p-1">
           <TextArea
             title={currentStep.name}
@@ -102,13 +115,8 @@ function App() {
             handleChange={handleChange}
             handleKeyDown={handleKeyDown}
           />
-
           <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
-            <Button
-              text="clear"
-              onClick={handleClear}
-              name={currentStep.name}
-            />
+            <Button text="clear" onClick={handleClear} name={currentStep.name} />
             <Button
               text="continue"
               onClick={handleContinue}
@@ -142,6 +150,7 @@ function App() {
         <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
         <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
       </div>
+
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
