@@ -14,7 +14,7 @@ export default function TextArea({title, placeholder, inputValue, handleChange, 
         onKeyDown={handleKeyDown}
         required
       ></textarea>
-      <div className="absolute top-2 right-2 cursor-pointer text-white-text" onClick={() => setTooltip(prev => !prev)}>
+      <div className="absolute top-2 right-2 cursor-pointer text-dark-text" onClick={() => setTooltip(prev => !prev)}>
         <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-primary-green">
           {!tooltip ? "?" : "X"}
         </div>
