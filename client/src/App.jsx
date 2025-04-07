@@ -19,6 +19,7 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
+  const [errorMessages, setErrorMessages] = useState({});
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,7 +69,7 @@ function App() {
   };
 
   // handle submit form
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
