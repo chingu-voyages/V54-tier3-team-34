@@ -5,10 +5,13 @@ export default function AppExplanation({ setExplanationOpen }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      console.log(e.key)
       if (e.key === "ArrowLeft") {
         handlePrevSlide();
       } else if (e.key === "ArrowRight") {
         handleNextSlide();
+      } else if (e.key === "Escape"){
+        setExplanationOpen(prev => !prev)
       }
     };
 
