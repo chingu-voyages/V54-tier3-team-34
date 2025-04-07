@@ -20,9 +20,9 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="flex w-full items-center justify-center gap-5 text-4xl text-green-500">
+      <div className="flex w-full items-center justify-center gap-5 text-4xl text-primary-green">
         <span
-          className={`mt-2 cursor-pointer text-2xl hover:text-white ${!stepNumber && "invisible"}`}
+          className={`mt-2 cursor-pointer text-2xl hover:text-white-text ${!stepNumber && "invisible"}`}
           onClick={handleBack}
         >
           ←
@@ -50,7 +50,7 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
                 className="translate-y-[1.5px] cursor-pointer text-2xl hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 onClick={() => handleClick(i)}
               >
-                <div className="text-green-500/60">⬟</div>
+                <div className="text-primary-green/60">⬟</div>
                 <div className="absolute top-[10px] left-[8px] text-xs font-bold text-black">
                   {i + 1}
                 </div>
@@ -69,14 +69,14 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
                 >
                   ⬠
                 </div>
-                <div className="absolute top-[16px] left-[9px] text-xs text-white opacity-0 transition-all group-hover:opacity-100">
+                <div className="absolute top-[16px] left-[9px] text-xs text-white-text opacity-0 transition-all group-hover:opacity-100">
                   {i + 1}
                 </div>
               </div>
             );
         })}
         <span
-          className={`mt-2 cursor-pointer text-2xl hover:text-white ${stepNumber === 4 && "invisible"}`}
+          className={`mt-2 cursor-pointer text-2xl hover:text-white-text ${stepNumber === 4 && "invisible"}`}
           onClick={handleForward}
         >
           →

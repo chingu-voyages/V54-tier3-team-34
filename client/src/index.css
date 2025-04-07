@@ -2,6 +2,16 @@
 
 @theme {
   --font-tektur: Tektur, sans-serif;
+
+  --color-dark-backroung: hsl(150, 17, 2);
+  
+  --color-dark-green-shade: hsl(144 61% 10% / 1);
+  --color-dark-gay-shade: hsl(150deg 7.14% 10.98%);
+
+  --color-primary-green: hsl(144, 100, 61);
+  
+  --color-white-text: hsl(140, 23, 95);
+
 }
 
 .penta {

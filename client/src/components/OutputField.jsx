@@ -8,7 +8,7 @@ import "../markdown.css"; // [WIP] basic styling for the HTML generated from the
 
 export default function OutputField({ response }) {
   return (
-    <div className="markdown-content mx-1 mt-5 flex-1 border border-white bg-green-500/20 p-3 text-sm tracking-wider text-amber-50">
+    <div className="markdown-content mx-1 mt-5 flex-1 border border-white-text bg-primary-green/20 p-3 text-sm tracking-wider text-white-text">
       {/* // This is how we use ReactMarkdown with the plugins we need */}
       <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSanitize]}> 
         {response}
