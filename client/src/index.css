@@ -7,9 +7,11 @@
   --color-dark-text: hsl(150, 17%, 2%);
   
   --color-dark-green-shade: hsl(144, 61%, 10%);
-  --color-dark-gay-shade: hsl(150, 7.14%, 10.98%);
+  --color-dark-gray-shade: hsl(150, 7.14%, 10.98%);
 
   --color-primary-green: hsl(144.18, 100%, 39.41%);
+  --color-primary-green-darker-shade: hsl(144.3, 96.8%, 24.51%);
+  --color-accent-green: hsl(144.18, 100%, 50.41%);
   
   
   --color-white-text: hsl(140, 23%, 95%);
