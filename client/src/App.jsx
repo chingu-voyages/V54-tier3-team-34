@@ -9,7 +9,6 @@ import OutputField from "./components/OutputField";
 import { steps } from "./steps";
 import { generateWithGemini } from "./ai-model";
 
-
 function App() {
   const [formData, setFormData] = useState({
     persona: "",
@@ -20,9 +19,9 @@ function App() {
   });
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
+  const [errorMessages, setErrorMessages] = useState({});
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessages, setErrorMessages] = useState({});
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -55,7 +54,7 @@ function App() {
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
   const validateInput = () => {
-    setErrorMessages({})
+    setErrorMessages({});
     const missingData = {};
     // if step isn't filled out, create error object with key and error message
     Object.entries(formData).forEach(([key, value], index) => {
@@ -71,6 +70,8 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // run validation function.  if error string is returned, set errorMessage and stop and return
+
+    //check to make sure all data is present:
     const missingData = validateInput();
 
     // if there are any error messags in object, add them to state
@@ -78,6 +79,8 @@ function App() {
       setErrorMessages(missingData);
       return;
     }
+
+    // if all data is present, make api call
     // if no errors - proceed to communicate with API
     
     setIsLoading(true);
@@ -96,7 +99,7 @@ function App() {
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="min-h-24 bg-green-500 p-3 m-2">
+        <div className="m-2 min-h-24 bg-green-500 p-3">
           {currentStep.description
             .split(" ")
             .map((word, i) =>
@@ -108,6 +111,11 @@ function App() {
             )}
         </div>
         {/* if there is output */}
+        {isLoading ? (
+          <OutputField response={"Loading..."} />
+        ) : (
+          aiResponse && <OutputField response={aiResponse} />
+        )}
         {/* <OutputField /> */}
         {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
         <form onSubmit={handleSubmit} noValidate>
@@ -126,14 +134,20 @@ function App() {
                 name={currentStep.name}
               />
               <Button
+                text="clear"
+                onClick={handleClear}
+                name={currentStep.name}
+              />
+              <Button
                 text="continue"
                 onClick={handleContinue}
                 name={currentStep.name}
                 disabled={stepNumber === 4}
               />
             </div>
+            </div>
           </div>
-          <GenerateButton formData={formData}/>
+          <GenerateButton formData={formData} />
         </form>
 
         <ProgressBar
@@ -149,15 +163,7 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <div className="fixed right-3 bottom-3 z-100 flex items-center justify-center cursor-pointer hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" onClick={handleSubmit}>
-        <div className="absolute z-10 text-xs leading-[10px] text-white">
-          <div>gen</div>
-          <div>er</div>ate
-        </div>
-        <div className="penta animate-rotate absolute h-13 w-13 bg-black"></div>
-        <button className="penta animate-rotate relative h-12 w-12 bg-green-500"></button>
-      </div>
-
+      
       <footer className="hidden w-full translate-y-full bg-black text-center md:block">
         <Footer />
       </footer>
