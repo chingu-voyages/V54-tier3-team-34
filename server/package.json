@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "express": "^4.21.2"
   },
   "devDependencies": {

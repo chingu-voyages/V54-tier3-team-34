@@ -1,3 +1,5 @@
+import { createId as createHash } from "@paralleldrive/cuid2";
+
 export default function makeConversation({ userInput, aiResult }) {
   /**
    * TODO: add the same client validation after moving ai generation to the server.
@@ -20,10 +22,12 @@ export default function makeConversation({ userInput, aiResult }) {
     },
   };
 
+  const hash = userInput.hash ?? createHash();
+
   const content = [prompt];
 
-  // TODO: create unique hash to be used for making the conversation url on the client
   return Object.freeze({
+    getHash: () => hash,
     getContent: () => content,
   });
 }

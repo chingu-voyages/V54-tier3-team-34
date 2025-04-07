@@ -16,9 +16,10 @@ export async function createConversation(req, res) {
     const conversation = makeConversation(conversationInfo);
     const saved = await conversationsDb.insert({
       content: conversation.getContent(),
+      hash: conversation.getHash(), // TODO: index the hash
     });
 
-    res.status(201).json({ conversation: saved });
+    res.status(201).json(saved);
   } catch (error) {
     // TODO: handle each error case separately
     console.error("Error while trying to create a conversation", error);
