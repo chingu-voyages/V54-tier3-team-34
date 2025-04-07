@@ -67,7 +67,7 @@ function App() {
   };
 
   // handle submit form
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // run validation function.  if error string is returned, set errorMessage and stop and return
     const missingData = validateInput();
