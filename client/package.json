@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
     "lint": "eslint .",
+    "format": "prettier . --write",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

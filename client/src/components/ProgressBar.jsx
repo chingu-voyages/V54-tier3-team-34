@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function ProgressBar({ steps, stepNumber, setStepNumber, formData, errorMessages}) {
+export default function ProgressBar({
+  steps,
+  stepNumber,
+  setStepNumber,
+  formData,
+  errorMessages,
+}) {
   // move steps back
   const handleBack = () => {
     if (stepNumber === 0) return;
@@ -82,7 +88,11 @@ export default function ProgressBar({ steps, stepNumber, setStepNumber, formData
           →
         </span>
       </div>
-        <div className="text-red-500 flex text-xs flex-col justify-center items-center">{Object.values(errorMessages).map(error => <div>{error}</div>)}</div>
+      <div className="flex flex-col items-center justify-center text-xs text-red-500">
+        {Object.values(errorMessages).map((error) => (
+          <div>{error}</div>
+        ))}
+      </div>
     </div>
   );
 }
