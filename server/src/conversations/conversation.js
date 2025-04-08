@@ -1,33 +1,34 @@
-import { createId as createHash } from "@paralleldrive/cuid2";
+import {
+  createId as makeHash,
+  isCuid as isValidHash,
+} from "@paralleldrive/cuid2";
+import { makeId, isValidId } from "../../db/index.js";
 
-export default function makeConversation({ userInput, aiResult }) {
-  /**
-   * TODO: add the same client validation after moving ai generation to the server.
-   * ? const prompt = makePrompt({ constraint, context, output, persona, task })
-   * some considerations:
-   * - security risks: guard against XSS - cannot trut users
-   * - generate the answer from the backend. Maybe as a prompt property?
-   * - security risks: guard against XSS - cannot trust ai answers
-   * ? prompt api: maybe { generated, input: { constraint, context, output, persona, task }}
-   * - conversation chain would take too many tokens like this. How to make it lean?
-   */
-  const prompt = {
-    generated: aiResult,
-    input: {
-      constraint: userInput.constraint,
-      context: userInput.context,
-      output: userInput.output,
-      persona: userInput.persona,
-      task: userInput.task,
-    },
-  };
+export function makeConversation({
+  id = makeId(),
+  hash = makeHash(),
+  history = [],
+  createdAt = Date.now(),
+  updatedAt = Date.now(),
+} = {}) {
+  if (!isValidId(id)) {
+    throw new Error("invalid conversation id");
+  }
 
-  const hash = userInput.hash ?? createHash();
+  if (!isValidHash(hash)) {
+    throw new Error("invalid conversation hash");
+  }
 
-  const content = [prompt];
+  if (!Array.isArray(history)) {
+    throw new Error("expected conversation history to be an array");
+  }
 
   return Object.freeze({
+    getId: () => id,
     getHash: () => hash,
-    getContent: () => content,
+    getHistory: () => history,
+    getCreatedAt: () => createdAt,
+    getUpdatedAt: () => updatedAt,
+    addPrompt: (prompt) => history.push(prompt),
   });
 }

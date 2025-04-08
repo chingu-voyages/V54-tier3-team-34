@@ -6,10 +6,10 @@ export default { insert };
 async function insert({ ...conversationInfo }) {
   const db = await makeDb();
 
-  if (!db["conversations"]) {
-    db["conversations"] = [];
+  if (!db["prompts"]) {
+    db["prompts"] = [];
   }
 
-  db["conversations"].push({ ...conversationInfo });
-  return db["conversations"].at(-1);
+  db["prompts"].push({ ...conversationInfo });
+  return db["prompts"].at(-1);
 }

@@ -16,3 +16,7 @@ let nextAutoIncrementId = 1;
 export function makeId() {
   return nextAutoIncrementId++;
 }
+
+export function isValidId(id) {
+  return typeof id == "number" && id > 0 && id < nextAutoIncrementId;
+}
