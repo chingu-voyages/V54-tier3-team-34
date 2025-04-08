@@ -97,8 +97,8 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
-      <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="min-h-24 bg-green-500 p-3">
+      <div className="w-full max-w-[1000px] flex-1">
+        {/* <div className="min-h-24 bg-green-500 p-3">
           {currentStep.description
             .split(" ")
             .map((word, i) =>
@@ -108,14 +108,14 @@ function App() {
                 word + " "
               ),
             )}
-        </div>
+        </div> */}
         {/* if there is output */}
         {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
         <form onSubmit={handleSubmit} noValidate>
           <div className="relative mx-1 mt-5 p-1">
             <TextArea
               title={currentStep.name}
-              placeholder={currentStep.example}
+              description={currentStep.description}
               inputValue={formData[currentStep.name]}
               handleChange={handleChange}
               handleKeyDown={handleKeyDown}
