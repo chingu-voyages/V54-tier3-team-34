@@ -18,7 +18,9 @@ export async function createConversation(req, res) {
     const conversation = makeConversation();
     const prompt = makePrompt(promptInfo);
 
-    // TODO: Do all of this in a transaction to avoid 1/2 writes failing
+    await prompt.generateAnswer();
+
+    // TODO: Do all of this in a transaction to avoid partial failing writes
     const savedConversation = await conversationsRepository.insert({
       id: conversation.getId(),
       hash: conversation.getHash(),

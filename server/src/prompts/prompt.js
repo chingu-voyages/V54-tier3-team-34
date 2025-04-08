@@ -1,4 +1,5 @@
 import { makeId, isValidId } from "../../db/index.js";
+import aiAgent from "./ai-agent.js";
 
 export function makePrompt({
   id = makeId(),
@@ -7,7 +8,6 @@ export function makePrompt({
   format,
   persona,
   task,
-  response: generatedAnswer,
   createdOn: createdAt = Date.now(),
   updatedOn: updatedAt = Date.now(),
 }) {
@@ -43,9 +43,7 @@ export function makePrompt({
     throw new Error("prompt task is required");
   }
 
-  if (!generatedAnswer) {
-    throw new Error("prompt's generated response is missing");
-  }
+  let answer;
 
   return Object.freeze({
     getId: () => id,
@@ -54,8 +52,17 @@ export function makePrompt({
     getFormat: () => format,
     getPersona: () => persona,
     getTask: () => task,
-    getAnswer: () => generatedAnswer,
+    getAnswer: () => answer,
     getCreatedAt: () => createdAt,
     getUpdatedAt: () => updatedAt,
+    generateAnswer: async () => {
+      answer = await aiAgent.answerWithGemini({
+        constraint,
+        context,
+        format,
+        persona,
+        task,
+      });
+    },
   });
 }

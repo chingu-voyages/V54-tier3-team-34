@@ -17,6 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/genai": "^0.7.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "express": "^4.21.2"
   },
