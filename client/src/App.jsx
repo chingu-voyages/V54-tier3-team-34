@@ -9,7 +9,6 @@ import OutputField from "./components/OutputField";
 import { steps } from "./steps";
 import { generateWithGemini } from "./ai-model";
 
-
 function App() {
   const [formData, setFormData] = useState({
     persona: "",
@@ -23,8 +22,6 @@ function App() {
   const [errorMessages, setErrorMessages] = useState({});
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -57,7 +54,7 @@ function App() {
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
   const validateInput = () => {
-    setErrorMessages({})
+    setErrorMessages({});
     const missingData = {};
     // if step isn't filled out, create error object with key and error message
     Object.entries(formData).forEach(([key, value], index) => {
@@ -72,15 +69,14 @@ function App() {
   // handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // run validation function.  if error string is returned, set errorMessage and stop and return
-    const missingData = validateInput();
 
-    // if there are any error messags in object, add them to state
+    const missingData = validateInput();
     if (Object.keys(missingData).length) {
       setErrorMessages(missingData);
       return;
     }
 
+    // if all data is present, make api call
     setIsLoading(true);
     try {
       const response = await generateWithGemini(formData); // we can change this logic later to dinamicly select the AI model
@@ -97,20 +93,13 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
-      <div className="w-full max-w-[1000px] flex-1">
-        {/* <div className="min-h-24 bg-green-500 p-3">
-          {currentStep.description
-            .split(" ")
-            .map((word, i) =>
-              word === currentStep.name ? (
-                <strong key={i}>{word} </strong>
-              ) : (
-                word + " "
-              ),
-            )}
-        </div> */}
+      <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
-        {isLoading ? (<OutputField response={'Loading...'} />) : (aiResponse && <OutputField response={aiResponse} />)}
+        {isLoading ? (
+          <OutputField response={"Loading..."} />
+        ) : (
+          aiResponse && <OutputField response={aiResponse} />
+        )}
         <form onSubmit={handleSubmit} noValidate>
           <div className="relative mx-1 mt-5 p-1">
             <TextArea
@@ -120,7 +109,6 @@ function App() {
               handleChange={handleChange}
               handleKeyDown={handleKeyDown}
             />
-
             <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
               <Button
                 text="clear"
@@ -135,7 +123,7 @@ function App() {
               />
             </div>
           </div>
-          <GenerateButton formData={formData}/>
+          <GenerateButton formData={formData} />
         </form>
         <ProgressBar
           steps={steps}
