@@ -11,7 +11,7 @@ export default function TextArea({
 
   return (
     <>
-    {/* textarea */}
+      {/* textarea */}
       <textarea
         className="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
         value={inputValue}
@@ -28,11 +28,10 @@ export default function TextArea({
         {title.slice(0, 1).toUpperCase() + title.slice(1)}
       </label>
       {/* open/close tooltip*/}
-      <div
-        className="peer/tooltip absolute top-2 right-2 cursor-pointer text-white"
-      >
-        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500"
-        onClick={() => setTooltip((prev) => !prev)}
+      <div className="peer/tooltip absolute top-2 right-2 cursor-pointer text-white">
+        <div
+          className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500"
+          onClick={() => setTooltip((prev) => !prev)}
         >
           {!tooltip ? "?" : "X"}
         </div>
