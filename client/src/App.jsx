@@ -94,17 +94,6 @@ function App() {
     <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        <div className="m-2 min-h-24 bg-green-500 p-3">
-          {currentStep.description
-            .split(" ")
-            .map((word, i) =>
-              word === currentStep.name ? (
-                <strong key={i}>{word} </strong>
-              ) : (
-                word + " "
-              ),
-            )}
-        </div>
         {/* if there is output */}
         {isLoading ? (
           <OutputField response={"Loading..."} />
@@ -115,7 +104,7 @@ function App() {
           <div className="relative mx-1 mt-5 p-1">
             <TextArea
               title={currentStep.name}
-              placeholder={currentStep.example}
+              description={currentStep.description}
               inputValue={formData[currentStep.name]}
               handleChange={handleChange}
               handleKeyDown={handleKeyDown}
