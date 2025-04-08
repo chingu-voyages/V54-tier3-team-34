@@ -29,9 +29,9 @@ export default function TextArea({
       </label>
       {/* open/close tooltip*/}
       <div
-        className="peer/tooltip absolute top-2 right-2 cursor-pointer text-white"
+        className="peer/tooltip absolute top-2 right-2 cursor-pointer text-dark-text"
       >
-        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-500"
+        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-green"
         onClick={() => setTooltip((prev) => !prev)}
         >
           {!tooltip ? "?" : "X"}
@@ -39,10 +39,10 @@ export default function TextArea({
       </div>
       {/* tooltip */}
       <div
-        className={`pointer-events-none absolute -top-18 right-3 z-100 min-h-14 rounded-lg bg-green-500 p-3 text-xs tracking-wider opacity-0 transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
+        className={`pointer-events-none absolute -top-18 right-3 z-100 min-h-14 rounded-lg bg-primary-green p-3 text-xs tracking-wider opacity-0 transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
       >
         {description}
-        <div className="text-bubble absolute right-2 -bottom-5 h-7 w-7 bg-green-500"></div>
+        <div className="text-bubble absolute right-2 -bottom-5 h-7 w-7 bg-primary-green"></div>
       </div>
     </>
   );

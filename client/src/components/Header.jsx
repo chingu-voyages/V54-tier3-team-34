@@ -19,7 +19,7 @@ export default function Header() {
       </h1>
       <div className="text-xs text-white-text mb-2">{formattedDate}</div>
       <div
-        className="cursor-pointer font-bold text-white-text bg-primary-green rounded-3xl text-sm py-1 px-2"
+        className="cursor-pointer font-bold text-dark-text bg-primary-green rounded-3xl text-sm py-1 px-2"
         onClick={() => setExplanationOpen((prev) => !prev)}
       >
         help!

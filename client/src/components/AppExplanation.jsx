@@ -31,23 +31,23 @@ export default function AppExplanation({ setExplanationOpen }) {
       responses.
     </p>,
     <p>
-      <strong className="text-white">Persona</strong> – Defines the role the AI
+      <strong className="text-dark-text">Persona</strong> – Defines the role the AI
       should take (e.g., 'You are a marketing expert...').
     </p>,
     <p>
-      <strong className="text-white">Context</strong> – Provides background
+      <strong className="text-dark-text">Context</strong> – Provides background
       information for better understanding.
     </p>,
     <p>
-      <strong className="text-white">Task</strong> – Clearly states what needs
+      <strong className="text-dark-text">Task</strong> – Clearly states what needs
       to be done.
     </p>,
     <p>
-      <strong className="text-white">Output</strong> – Specifies the desired
+      <strong className="text-dark-text">Output</strong> – Specifies the desired
       format or response style.
     </p>,
     <p>
-      <strong className="text-white">Constraints</strong> – Sets limitations or
+      <strong className="text-dark-text">Constraints</strong> – Sets limitations or
       additional instructions (e.g., word limit, tone).
     </p>,
   ];
@@ -62,13 +62,13 @@ export default function AppExplanation({ setExplanationOpen }) {
     setSlide((prev) => (prev += 1));
   };
   return (
-    <div className="absolute inset-0 z-[101] flex items-center justify-center bg-black/60">
-      <div className="penta relative z-[110] flex aspect-square w-[400px] flex-col items-center bg-green-500 md:w-[600px]">
+    <div className="absolute inset-0 z-[101] flex items-center justify-center bg-dark-backround/60">
+      <div className="penta relative z-[110] flex aspect-square w-[400px] flex-col items-center bg-primary-green md:w-[600px]">
         <div
           className="absolute top-3 left-1/2 -translate-x-1/2 cursor-pointer font-bold"
           onClick={() => setExplanationOpen((prev) => !prev)}
         >
-          <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-black text-white hover:bg-white hover:text-black">
+          <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-dark-backround text-white-text hover:bg-white-text hover:text-dark-text">
             X
           </div>
         </div>
@@ -77,15 +77,15 @@ export default function AppExplanation({ setExplanationOpen }) {
           <div className="mt-10 text-xs md:mt-24 md:text-base">
             {slides[slide]}
           </div>
-          <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-white">
+          <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-dark-text">
             <div
-              className={`cursor-pointer text-2xl hover:text-black ${slide === 0 && "invisible"}`}
+              className={`cursor-pointer text-5xl hover:text-white-text ${slide === 0 && "invisible"}`}
               onClick={handlePrevSlide}
             >
               ←
             </div>
             <div
-              className={`cursor-pointer text-2xl hover:text-black ${slide === 5 && "invisible"}`}
+              className={`cursor-pointer text-5xl hover:text-white-text ${slide === 5 && "invisible"}`}
               onClick={handleNextSlide}
             >
               →
