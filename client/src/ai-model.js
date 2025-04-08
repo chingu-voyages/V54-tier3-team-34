@@ -1,14 +1,25 @@
-import { GoogleGenAI } from "@google/genai";
+export default { generateAnswer };
 
-export async function generateWithGemini(formData) {
-  const ai = new GoogleGenAI({
-    apiKey: import.meta.env.VITE_GEMINI_API_KEY,
-  });
+const BASE_URL = "/api/v1";
 
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: `Generate a response for the following prompt built using the Pentagram Framework for prompt engineering: Persona:{${formData.persona}}, Context:{${formData.context}}, Task:{${formData.task}}, Output:{${formData.output}}, Constraint:{${formData.constraint}}.`,
-  });
-
-  return response.text;
+export async function generateAnswer({
+  constraint,
+  context,
+  output,
+  persona,
+  task,
+}) {
+  return fetch(`${BASE_URL}/conversations`, {
+    method: "POST",
+    body: JSON.stringify({
+      constraint,
+      context,
+      format: output,
+      persona,
+      task,
+    }),
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((data) => data.history.at(-1).generatedAnswer);
 }
