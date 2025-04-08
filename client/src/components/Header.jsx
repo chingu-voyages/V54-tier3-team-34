@@ -18,12 +18,13 @@ export default function Header() {
         Penta AI
       </h1>
       <div className="text-xs text-white-text mb-2">{formattedDate}</div>
-      <div
+      <button
         className="cursor-pointer font-bold text-dark-text bg-primary-green rounded-3xl text-sm py-1 px-2"
         onClick={() => setExplanationOpen((prev) => !prev)}
+        tabIndex={0}
       >
         help!
-      </div>
+      </button>
 
       {explanationOpen && (
         <AppExplanation setExplanationOpen={setExplanationOpen} />

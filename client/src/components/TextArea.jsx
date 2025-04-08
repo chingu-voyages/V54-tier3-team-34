@@ -31,11 +31,11 @@ export default function TextArea({
       <div
         className="peer/tooltip absolute top-2 right-2 cursor-pointer text-dark-text"
       >
-        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-green"
+        <button type="button" className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-green"
         onClick={() => setTooltip((prev) => !prev)}
         >
           {!tooltip ? "?" : "X"}
-        </div>
+        </button>
       </div>
       {/* tooltip */}
       <div

@@ -6,6 +6,7 @@ export default function GenerateButton({ formData }) {
 
   return (
     <button
+    tabIndex={0}
       type="submit"
       className="fixed right-3 bottom-3 z-100 flex cursor-pointer items-center justify-center hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
     >

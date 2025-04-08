@@ -68,9 +68,9 @@ export default function AppExplanation({ setExplanationOpen }) {
           className="absolute top-3 left-1/2 -translate-x-1/2 cursor-pointer font-bold"
           onClick={() => setExplanationOpen((prev) => !prev)}
         >
-          <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-dark-backround text-white-text hover:bg-white-text hover:text-dark-text">
+          <button className="peer flex h-5 w-5 items-center justify-center rounded-full bg-dark-backround text-white-text hover:bg-white-text hover:text-dark-text">
             X
-          </div>
+          </button>
         </div>
         <div className="mt-20 md:mt-30 flex flex-col items-center justify-center px-20">
           <h2 className="text-lg md:text-2xl font-bold">Pentagram Method</h2>
@@ -78,18 +78,18 @@ export default function AppExplanation({ setExplanationOpen }) {
             {slides[slide]}
           </div>
           <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-dark-text">
-            <div
+            <button
               className={`cursor-pointer text-5xl hover:text-white-text ${slide === 0 && "invisible"}`}
               onClick={handlePrevSlide}
             >
               ←
-            </div>
-            <div
+            </button>
+            <button
               className={`cursor-pointer text-5xl hover:text-white-text ${slide === 5 && "invisible"}`}
               onClick={handleNextSlide}
             >
               →
-            </div>
+            </button>
           </div>
         </div>
       </div>
