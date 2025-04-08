@@ -7,7 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
-import { generateAnswer } from "./ai-model";
+import { generateAnswer } from "./services/ai-agent.js";
 
 function App() {
   const [formData, setFormData] = useState({
