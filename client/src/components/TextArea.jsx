@@ -12,7 +12,7 @@ export default function TextArea({
   return (
     <>
       <textarea
-        className="field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
+        className="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
         value={inputValue}
         name={title}
         onChange={handleChange}
