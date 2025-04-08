@@ -81,7 +81,7 @@ export default function ProgressBar({
                 >
                   ⬠
                 </div>
-                <div className="text-primary-green absolute top-[16px] left-[17px] text-xs opacity-100 group-hover:opacity-100 z-50">
+                <div className={`${errorMessages?.[step.name] ? "text-red-500" : "text-primary-green"} absolute top-[16px] left-[17px] text-xs opacity-100 group-hover:opacity-100 z-50`}>
                   {i + 1}
                 </div>
               </button>
