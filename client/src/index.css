@@ -61,3 +61,7 @@
 .animate-grow-text {
   animation: grow 1s ease-in-out infinite;
 }
+
+.text-bubble {
+  clip-path: polygon(0 0,100% 0,100% 100%,0 0);
+}
