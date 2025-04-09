@@ -93,11 +93,14 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-black pb-24">
-         {explanationOpen && (
-          <AppExplanation setExplanationOpen={setExplanationOpen} />
-        )}
-      <Header explanationOpen={explanationOpen} setExplanationOpen={setExplanationOpen}/>
+    <div className="flex min-h-screen flex-col items-center bg-black">
+      {explanationOpen && (
+        <AppExplanation setExplanationOpen={setExplanationOpen} />
+      )}
+      <Header
+        explanationOpen={explanationOpen}
+        setExplanationOpen={setExplanationOpen}
+      />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
         {isLoading ? (
@@ -139,6 +142,7 @@ function App() {
           errorMessages={errorMessages}
         />
       </div>
+
       {/* initial button */}
       {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
         generate
