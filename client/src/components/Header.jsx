@@ -13,7 +13,7 @@ export default function Header() {
   });
 
   return (
-    <div className="flex md:flex-col items-center justify-between w-full mt-10 px-5 sticky top-0 bg-black/90 p-2">
+    <div className="flex md:flex-col items-center justify-between w-full mt-5 px-5 sticky top-0 bg-black/90 p-2">
       <h1 className="text-center text-4xl text-green-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
         Penta AI
       </h1>

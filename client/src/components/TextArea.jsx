@@ -6,6 +6,7 @@ export default function TextArea({
   inputValue,
   handleChange,
   handleKeyDown,
+  aiResponse
 }) {
   const [tooltip, setTooltip] = useState(false);
 
@@ -13,7 +14,7 @@ export default function TextArea({
     <>
       {/* textarea */}
       <textarea
-        className="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
+        className={`peer field-sizing-content ${aiResponse ? "min-h-24" : "min-h-52"} w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500`}
         value={inputValue}
         name={title}
         onChange={handleChange}

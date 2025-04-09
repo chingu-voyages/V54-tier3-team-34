@@ -107,6 +107,7 @@ function App() {
               inputValue={formData[currentStep.name]}
               handleChange={handleChange}
               handleKeyDown={handleKeyDown}
+              aiResponse={aiResponse}
             />
             <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
               <Button
