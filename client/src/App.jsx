@@ -90,7 +90,7 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-5 bg-black">
+    <div className="flex min-h-screen flex-col items-center gap-5 bg-black pb-24">
       <Header />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
