@@ -8,6 +8,7 @@ import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
 import { generateWithGemini } from "./ai-model";
+import AppExplanation from "./components/AppExplanation";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -22,6 +23,8 @@ function App() {
   const [errorMessages, setErrorMessages] = useState({});
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [explanationOpen, setExplanationOpen] = useState(false);
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -90,8 +93,11 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-5 bg-black pb-24">
-      <Header />
+    <div className="flex min-h-screen flex-col items-center bg-black pb-24">
+         {explanationOpen && (
+          <AppExplanation setExplanationOpen={setExplanationOpen} />
+        )}
+      <Header explanationOpen={explanationOpen} setExplanationOpen={setExplanationOpen}/>
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
         {isLoading ? (

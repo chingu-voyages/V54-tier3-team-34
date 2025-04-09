@@ -62,7 +62,7 @@ export default function AppExplanation({ setExplanationOpen }) {
     setSlide((prev) => (prev += 1));
   };
   return (
-    <div className="absolute inset-0 z-[101] flex items-center justify-center bg-black/60">
+    <div className="fixed inset-0 z-[101] flex items-center justify-center bg-black/60">
       <div className="penta relative z-[110] flex aspect-square w-[400px] flex-col items-center bg-green-500 md:w-[600px]">
         <div
           className="absolute top-3 left-1/2 -translate-x-1/2 cursor-pointer font-bold"
