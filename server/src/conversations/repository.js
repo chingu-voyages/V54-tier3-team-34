@@ -6,9 +6,9 @@ async function insert({ id, ...conversationInfo }) {
   const db = await makeDb();
 
   try {
-    const { acknowledged, insertedId } = await db
+    const { acknowledged } = await db
       .collection("conersations")
-      .insertOne({ ...conversationInfo });
+      .insertOne({ _id: id, ...conversationInfo });
 
     if (!acknowledged) {
       throw new Error("write non acknowledged by the db!", {
@@ -16,7 +16,7 @@ async function insert({ id, ...conversationInfo }) {
       });
     }
 
-    return { id: insertedId, ...conversationInfo };
+    return { id, ...conversationInfo };
   } catch (error) {
     console.error("failed to insert a new conversation", error);
   }

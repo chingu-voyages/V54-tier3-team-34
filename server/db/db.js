@@ -1,4 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { createId, isCuid } from "@paralleldrive/cuid2";
 
 const { DB_NAME, DB_URI } = process.env;
 let client;
@@ -25,13 +26,10 @@ export async function makeDb() {
   return client.db(DB_NAME);
 }
 
-// TODO: replace by a robust id generation utility
-// when switching to a real db, maybe use its id generation mechanism
-let nextAutoIncrementId = 1;
 export function makeId() {
-  return nextAutoIncrementId++;
+  return createId();
 }
 
 export function isValidId(id) {
-  return typeof id == "number" && id > 0 && id < nextAutoIncrementId;
+  return isCuid(id);
 }

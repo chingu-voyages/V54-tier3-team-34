@@ -6,9 +6,9 @@ async function insert({ id, ...promptInfo }) {
   const db = await makeDb();
 
   try {
-    const { acknowledged, insertedId } = await db
+    const { acknowledged } = await db
       .collection("prompts")
-      .insertOne({ ...promptInfo });
+      .insertOne({ _id: id, ...promptInfo });
 
     if (!acknowledged) {
       throw new Error("write non acknowledged by the db!", {
@@ -16,7 +16,7 @@ async function insert({ id, ...promptInfo }) {
       });
     }
 
-    return { id: insertedId, ...promptInfo };
+    return { id, ...promptInfo };
   } catch (error) {
     console.error("failed to insert a new prompt", error);
   }
