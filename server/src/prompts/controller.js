@@ -1,0 +1,45 @@
+import { makePrompt } from "../prompts/prompt.js";
+import repository from "./repository.js";
+
+export default { createPrompt };
+
+/**
+ * adds a new prompt to an existing conversation
+ * @param {import("express").Request} req express's incoming message
+ * @param {import("express").Response} res express's server Response
+ * @returns {undefined}
+ */
+export async function createPrompt(req, res) {
+  const { ...promptInfo } = req.body;
+  const { hash } = req.params;
+
+  try {
+    const prompt = makePrompt(promptInfo);
+    await prompt.generateAnswer();
+
+    const saved = await repository.insert({
+      conversationHash: hash,
+      id: prompt.getId(),
+      constraint: prompt.getConstraint(),
+      context: prompt.getContext(),
+      format: prompt.getFormat(),
+      persona: prompt.getPersona(),
+      task: prompt.getTask(),
+      answer: prompt.getAnswer(),
+      createdAt: prompt.getCreatedAt(),
+      updatedAt: prompt.getUpdatedAt(),
+    });
+
+    if (!saved) {
+      res.status(404).send();
+      return;
+    }
+
+    res.status(200).json(saved);
+  } catch (error) {
+    // TODO: handle each error case separately
+    console.error("Error while trying to create a new conversatiexn", error);
+    res.status(500).send();
+    return;
+  }
+}
