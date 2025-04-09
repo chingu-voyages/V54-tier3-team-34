@@ -1,7 +1,6 @@
 import { makeConversation } from "./conversation.js";
-import conversationsRepository from "./repository.js";
+import repository from "./repository.js";
 import { makePrompt } from "../prompts/prompt.js";
-import promptsRepository from "../prompts/repository.js";
 
 export default { createConversation };
 
@@ -15,34 +14,34 @@ export async function createConversation(req, res) {
   const { ...promptInfo } = req.body;
 
   try {
-    const conversation = makeConversation();
     const prompt = makePrompt(promptInfo);
-
     await prompt.generateAnswer();
 
-    // TODO: Do all of this in a transaction to avoid partial failing writes
-    // consider switching to embedded subdocuments for mongo
-    const savedConversation = await conversationsRepository.insert({
+    const history = [
+      {
+        id: prompt.getId(),
+        constraint: prompt.getConstraint(),
+        context: prompt.getContext(),
+        format: prompt.getFormat(),
+        persona: prompt.getPersona(),
+        task: prompt.getTask(),
+        answer: prompt.getAnswer(),
+        createdAt: prompt.getCreatedAt(),
+        updatedAt: prompt.getUpdatedAt(),
+      },
+    ];
+
+    const conversation = makeConversation({ history });
+
+    const saved = await repository.insert({
       id: conversation.getId(),
       hash: conversation.getHash(),
+      history: conversation.getHistory(),
       createdAt: conversation.getCreatedAt(),
       updatedAt: conversation.getUpdatedAt(),
     });
 
-    const savedPrompt = await promptsRepository.insert({
-      conversationId: conversation.getId(),
-      id: prompt.getId(),
-      constraint: prompt.getConstraint(),
-      context: prompt.getContext(),
-      format: prompt.getFormat(),
-      persona: prompt.getPersona(),
-      task: prompt.getTask(),
-      generatedAnswer: prompt.getAnswer(),
-      createdAt: prompt.getCreatedAt(),
-      updatedAt: prompt.getUpdatedAt(),
-    });
-
-    res.status(201).json({ ...savedConversation, history: [savedPrompt] });
+    res.status(201).json(saved);
   } catch (error) {
     // TODO: handle each error case separately
     console.error("Error while trying to create a new conversation", error);

@@ -20,7 +20,9 @@ export function makeConversation({
   }
 
   if (!Array.isArray(history)) {
-    throw new Error("expected conversation history to be an array");
+    throw new Error(
+      "conversation expected an array of prompts but received something else",
+    );
   }
 
   return Object.freeze({
@@ -29,6 +31,5 @@ export function makeConversation({
     getHistory: () => history,
     getCreatedAt: () => createdAt,
     getUpdatedAt: () => updatedAt,
-    addPrompt: (prompt) => history.push(prompt),
   });
 }
