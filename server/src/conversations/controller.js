@@ -21,6 +21,7 @@ export async function createConversation(req, res) {
     await prompt.generateAnswer();
 
     // TODO: Do all of this in a transaction to avoid partial failing writes
+    // consider switching to embedded subdocuments for mongo
     const savedConversation = await conversationsRepository.insert({
       id: conversation.getId(),
       hash: conversation.getHash(),

@@ -1,8 +1,8 @@
+import { makeId, isValidId } from "../../db/db.js";
 import {
   createId as makeHash,
   isCuid as isValidHash,
 } from "@paralleldrive/cuid2";
-import { makeId, isValidId } from "../../db/index.js";
 
 export function makeConversation({
   id = makeId(),

@@ -19,7 +19,8 @@
   "dependencies": {
     "@google/genai": "^0.7.0",
     "@paralleldrive/cuid2": "^2.2.2",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongodb": "^6.15.0"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^1.39.0",

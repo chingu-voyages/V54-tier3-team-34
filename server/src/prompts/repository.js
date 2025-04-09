@@ -1,15 +1,23 @@
-import makeDb from "../../db/index.js";
+import { makeDb } from "../../db/db.js";
 
-// TODO: update functions after switching to a real db instance
 export default { insert };
 
-async function insert({ ...conversationInfo }) {
+async function insert({ id, ...promptInfo }) {
   const db = await makeDb();
 
-  if (!db["prompts"]) {
-    db["prompts"] = [];
-  }
+  try {
+    const { acknowledged, insertedId } = await db
+      .collection("prompts")
+      .insertOne({ ...promptInfo });
 
-  db["prompts"].push({ ...conversationInfo });
-  return db["prompts"].at(-1);
+    if (!acknowledged) {
+      throw new Error("write non acknowledged by the db!", {
+        cause: { acknowledged },
+      });
+    }
+
+    return { id: insertedId, ...promptInfo };
+  } catch (error) {
+    console.error("failed to insert a new prompt", error);
+  }
 }

@@ -1,4 +1,4 @@
-import { makeId, isValidId } from "../../db/index.js";
+import { makeId, isValidId } from "../../db/db.js";
 import aiAgent from "./ai-agent.js";
 
 export function makePrompt({
@@ -12,11 +12,9 @@ export function makePrompt({
   updatedOn: updatedAt = Date.now(),
 }) {
   /**
-   * TODO: generate the answer from the backend.
    * some considerations:
    * - security risks: guard against XSS - cannot trust users
    * - security risks: guard against XSS - cannot trust ai answers
-   * ? prompt api: maybe { generated, input: { constraint, context, output, persona, task }}
    * - conversation chain would take too many tokens like this. How to make it lean?
    */
   if (!isValidId(id)) {
