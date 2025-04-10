@@ -43,3 +43,36 @@ export async function createPrompt(req, res) {
     return;
   }
 }
+
+/**
+ * adds a new prompt to an existing conversation
+ * @param {import("express").Request} req express's incoming message
+ * @param {import("express").Response} res express's server Response
+ * @returns {undefined}
+ */
+export async function deletePrompt(req, res) {
+  const { hash, id } = req.params;
+
+  if (!hash) {
+    res.status(400).json({ message: "no valid conversation hash provided" });
+  }
+
+  if (!id) {
+    res.status(400).json({ message: "no valid prompt id provided" });
+  }
+
+  try {
+    const deleted = repository.remove({ conversationHash: hash, id });
+
+    if (!deleted) {
+      res.status(404).send();
+    }
+
+    res.status(204).send();
+  } catch (error) {
+    // TODO: handle each error case separately
+    console.error("Error while trying to delete a prompt", error);
+    res.status(500).send();
+    return;
+  }
+}
