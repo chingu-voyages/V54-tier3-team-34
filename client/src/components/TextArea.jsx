@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 export default function TextArea({
   title,
@@ -17,7 +17,7 @@ export default function TextArea({
 
   return (
     <>
-    {/* textarea */}
+      {/* textarea */}
       <textarea
               ref={textareaRef}
 
@@ -43,26 +43,38 @@ export default function TextArea({
       {/* label */}
       <label
         htmlFor={title}
-        className="pointer-events-none absolute top-0 left-1 m-2 bg-dark-backround px-1 text-primary-green transition-all duration-400 peer-valid:-top-[15px] peer-valid:primary-green peer-valid:text-xs peer-valid:text-white-text peer-focus:-top-[15px] peer-focus:bg-primary-green peer-focus:text-xs peer-focus:text-dark-text"
+        className="text-primary-green 
+        
+        peer-valid:bg-primary-green 
+        peer-valid:text-dark-text peer-valid:border-dark-green-background 
+        
+    rounded-lg
+
+        peer-valid:-translate-y-3
+        peer-focus:-translate-y-3
+        peer-focus:bg-primary-green 
+        peer-focus:text-dark-text peer-focus:border-dark-green-background 
+        
+        pointer-events-none absolute   border-transparent/1 bg-none px-6 py-1 font-normal transition-all duration-300 ease-out"
       >
         {title.slice(0, 1).toUpperCase() + title.slice(1)}
       </label>
       {/* open/close tooltip*/}
-      <div
-        className="peer/tooltip absolute top-2 right-2 cursor-pointer text-dark-text"
-      >
-        <button type="button" className="flex h-5 w-5 items-center justify-center rounded-full bg-primary-green"
-        onClick={() => setTooltip((prev) => !prev)}
+      <div className="peer/tooltip text-dark-text absolute top-2 right-2 cursor-pointer">
+        <button
+          type="button"
+          className={` hover:bg-accent-green flex h-5 w-5 items-center justify-center rounded-full ${tooltip ? "bg-accent-green" : "bg-primary-green"}`}
+          onClick={() => setTooltip((prev) => !prev)}
         >
           {!tooltip ? "?" : "X"}
         </button>
       </div>
       {/* tooltip */}
       <div
-        className={`pointer-events-none absolute -top-18 right-3 z-100 min-h-14 rounded-lg bg-primary-green p-3 text-xs tracking-wider opacity-0 transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
+        className={`font-paragraph bg-primary-green pointer-events-none absolute -top-18 right-3 z-100 min-h-14 rounded-lg p-3 tracking-wider opacity-0 transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
       >
         {description}
-        <div className="text-bubble absolute right-2 -bottom-5 h-7 w-7 bg-primary-green"></div>
+        <div className="text-bubble bg-primary-green absolute right-2 -bottom-5 h-7 w-7"></div>
       </div>
     </>
   );

@@ -92,56 +92,69 @@ function App() {
     }
   };
 
-
   return (
-    <div className="flex min-h-screen flex-col items-center gap-5 bg-dark-backround">
+    <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
       <Header />
-      <div className="w-full max-w-[1000px] flex-1 border-primary-green">
+      <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl">
         {/* if there is output */}
         {isLoading ? (
           <OutputField response={"Loading..."} />
+        ) : aiResponse ? (
+          <OutputField response={aiResponse} />
         ) : (
-          aiResponse && <OutputField response={aiResponse} />
-        )}
-        <form onSubmit={handleSubmit} noValidate>
-          <div className="relative mx-1 mt-5 p-1">
-            <TextArea
-              title={currentStep.name}
-              description={currentStep.description}
-              inputValue={formData[currentStep.name]}
-              handleChange={handleChange}
-              handleKeyDown={handleKeyDown}
-            />
-            <div className="absolute bottom-5 flex w-full items-center justify-around gap-3">
-              <Button
-                text="clear"
-                onClick={handleClear}
-                name={currentStep.name}
-              />
-              <Button
-                text="continue"
-                onClick={handleContinue}
-                name={currentStep.name}
-                disabled={stepNumber === 4}
-              />
-            </div>
+          <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
+            <h2 className="text-center font-medium">
+              {" "}
+              Start prompting smarter.
+            </h2>
+            Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
+            to craft clear, effective prompts in just five steps.{" "}
           </div>
-          <GenerateButton formData={formData} />
-        </form>
-        <ProgressBar
-          steps={steps}
-          setStepNumber={setStepNumber}
-          stepNumber={stepNumber}
-          formData={formData}
-          errorMessages={errorMessages}
-        />
+        )}
+        <div className="bg-dark-green-background sticky bottom-0 flex flex-col items-stretch gap-4 pb-2">
+          <form onSubmit={handleSubmit} noValidate>
+            <div
+              className="bg-green-background-shade relative m-0 flex w-full flex-col rounded-xl border-none"
+              // has-focus:outline-1 has-focus:outline-primary-green
+            >
+              <TextArea
+                title={currentStep.name}
+                description={currentStep.description}
+                inputValue={formData[currentStep.name]}
+                handleChange={handleChange}
+                handleKeyDown={handleKeyDown}
+              />
+              <div className="mb-6 flex w-full items-center justify-around gap-3">
+                <Button
+                  text="clear"
+                  onClick={handleClear}
+                  name={currentStep.name}
+                />
+                <Button
+                  text="continue"
+                  onClick={handleContinue}
+                  name={currentStep.name}
+                  disabled={stepNumber === 4}
+                />
+              </div>
+            </div>
+            <GenerateButton formData={formData} />
+          </form>
+          <ProgressBar
+            steps={steps}
+            setStepNumber={setStepNumber}
+            stepNumber={stepNumber}
+            formData={formData}
+            errorMessages={errorMessages}
+          />
+        </div>
       </div>
       {/* initial button */}
       {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
         generate
       </button> */}
       {/* output already visible */}
-      <footer className="hidden w-full translate-y-full bg-dark-backround text-center md:block">
+      <footer className="bg-dark-backround hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
     </div>
