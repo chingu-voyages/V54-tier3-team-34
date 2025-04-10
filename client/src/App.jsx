@@ -154,7 +154,7 @@ function App() {
         generate
       </button> */}
       {/* output already visible */}
-      <footer className="bg-dark-backround hidden w-full translate-y-full text-center md:block">
+      <footer className="bg-dark-backround hidden w-full translate-y-full text-center md:block -z-10">
         <Footer />
       </footer>
     </div>
