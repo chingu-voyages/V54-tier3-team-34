@@ -7,7 +7,19 @@
   .markdown-content h1, .markdown-content h2, .markdown-content h3 {
     margin: 1.5em 0 0.8em;
   }
+
+  .markdown-content ul>li{
+    list-style: initial;
+  }
+
+  .markdown-content ol>li{
+    list-style: decimal;
+  }
   
+  .markdown-content p {
+    margin-bottom: 1rem;
+  }
+
   .markdown-content h1 { font-size: 2em; }
   .markdown-content h2 { font-size: 1.7em; }
   .markdown-content h3 { font-size: 1.4em; }

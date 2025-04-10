@@ -95,7 +95,7 @@ function App() {
   return (
     <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
       <Header />
-      <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl">
+      <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl flex flex-col justify-end ">
         {/* if there is output */}
         {isLoading ? (
           <OutputField response={"Loading..."} />
