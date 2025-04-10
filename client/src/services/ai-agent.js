@@ -21,5 +21,5 @@ export async function generateAnswer({
     headers: { "Content-Type": "application/json" },
   })
     .then((response) => response.json())
-    .then((data) => data.history.at(-1).generatedAnswer);
+    .then((conversation) => conversation.history.at(-1).answer);
 }
