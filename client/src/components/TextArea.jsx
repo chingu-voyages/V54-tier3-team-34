@@ -60,10 +60,12 @@ export default function TextArea({
         {title.slice(0, 1).toUpperCase() + title.slice(1)}
       </label>
       {/* open/close tooltip*/}
+
       <div className="peer/tooltip text-dark-text absolute top-2 right-2 cursor-pointer">
         <button
           type="button"
           className={` hover:bg-accent-green flex h-5 w-5 items-center justify-center rounded-full ${tooltip ? "bg-accent-green" : "bg-primary-green"}`}
+
           onClick={() => setTooltip((prev) => !prev)}
         >
           {!tooltip ? "?" : "X"}

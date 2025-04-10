@@ -100,6 +100,7 @@ export default function ProgressBar({
           <div>{error}</div>
         ))}
       </div>
+
     </div>
   );
 }

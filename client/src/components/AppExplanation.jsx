@@ -5,13 +5,13 @@ export default function AppExplanation({ setExplanationOpen }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      console.log(e.key)
+      console.log(e.key);
       if (e.key === "ArrowLeft") {
         handlePrevSlide();
       } else if (e.key === "ArrowRight") {
         handleNextSlide();
-      } else if (e.key === "Escape"){
-        setExplanationOpen(prev => !prev)
+      } else if (e.key === "Escape") {
+        setExplanationOpen((prev) => !prev);
       }
     };
 
@@ -72,6 +72,7 @@ export default function AppExplanation({ setExplanationOpen }) {
             X
           </button>
         </div>
+
         <div className="mt-20 md:mt-30 flex flex-col items-center justify-center px-20">
           <h2 className="text-lg md:text-2xl font-bold">Pentagram Framework</h2>
           <div className="mt-10 text-xs md:mt-24 md:text-base">
@@ -80,6 +81,7 @@ export default function AppExplanation({ setExplanationOpen }) {
           <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-dark-text">
             <button
               className={`cursor-pointer text-5xl hover:text-white-text ${slide === 0 && "invisible"}`}
+
               onClick={handlePrevSlide}
             >
               ←

@@ -45,7 +45,9 @@ export default function Footer() {
           </li>
         </ul>
       </div>
+
       <div className="mt-3"><a href="https://github.com/chingu-voyages/V54-tier3-team-34" className="text-dark-text font-semibold">GitHub </a>© 2025 Team 54-3-34. All rights reserved. </div>
+
     </div>
   );
 }
