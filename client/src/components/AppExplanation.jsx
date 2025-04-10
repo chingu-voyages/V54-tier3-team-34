@@ -23,30 +23,30 @@ export default function AppExplanation({ setExplanationOpen }) {
   }, [slide]);
 
   const slides = [
-    <p>
-      The Pentagram Method is a structured approach to crafting effective AI
+    <p className="font-paragraph">
+      The Pentagram Framework is a structured approach to crafting effective AI
       prompts by ensuring all essential components are included. It breaks down
-      a prompt into five key elements. By following this method, users can
+      a prompt into five key elements. By following this framework, users can
       create well-structured prompts that yield more accurate and useful AI
       responses.
     </p>,
-    <p>
+    <p className="font-paragraph">
       <strong className="text-dark-text">Persona</strong> – Defines the role the AI
       should take (e.g., 'You are a marketing expert...').
     </p>,
-    <p>
+    <p className="font-paragraph">
       <strong className="text-dark-text">Context</strong> – Provides background
       information for better understanding.
     </p>,
-    <p>
+    <p className="font-paragraph">
       <strong className="text-dark-text">Task</strong> – Clearly states what needs
       to be done.
     </p>,
-    <p>
+    <p className="font-paragraph">
       <strong className="text-dark-text">Output</strong> – Specifies the desired
       format or response style.
     </p>,
-    <p>
+    <p className="font-paragraph">
       <strong className="text-dark-text">Constraints</strong> – Sets limitations or
       additional instructions (e.g., word limit, tone).
     </p>,
@@ -54,7 +54,7 @@ export default function AppExplanation({ setExplanationOpen }) {
 
   const handlePrevSlide = () => {
     if (slide === 0) return;
-    setSlide((prev) => (prev -= 1));
+    setSlide((prev) => (prev -= 1));  
   };
 
   const handleNextSlide = () => {
@@ -73,7 +73,7 @@ export default function AppExplanation({ setExplanationOpen }) {
           </button>
         </div>
         <div className="mt-20 md:mt-30 flex flex-col items-center justify-center px-20">
-          <h2 className="text-lg md:text-2xl font-bold">Pentagram Method</h2>
+          <h2 className="text-lg md:text-2xl font-bold">Pentagram Framework</h2>
           <div className="mt-10 text-xs md:mt-24 md:text-base">
             {slides[slide]}
           </div>
