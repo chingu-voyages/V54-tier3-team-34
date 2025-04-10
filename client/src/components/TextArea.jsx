@@ -8,12 +8,32 @@ export default function TextArea({
   handleKeyDown,
 }) {
   const [tooltip, setTooltip] = useState(false);
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    // Focus the textarea whenever the title (current step) changes
+    textareaRef.current?.focus();
+  }, [title]);
 
   return (
     <>
     {/* textarea */}
       <textarea
-        className="peer field-sizing-content min-h-52 w-full border border-primary-green p-3 pt-8 pb-12 text-primary-green outline-offset-3 valid:pt-2 valid:outline valid:outline-primary-green focus:pt-2 focus:outline focus:outline-primary-green"
+              ref={textareaRef}
+
+
+
+              
+        className="peer font-paragraph text-primary-green mt-12 mr-8 mb-4 field-sizing-content max-h-36 min-h-12 resize-none overflow-y-auto rounded-[inherit] pr-2 pl-8 outline-none 
+        
+          [&::-webkit-scrollbar]:w-2.5
+  [&::-webkit-scrollbar-track]:rounded-full
+  [&::-webkit-scrollbar-thumb]:rounded-full
+  [&::-webkit-scrollbar-track]:bg-dark-green-shade
+  [&::-webkit-scrollbar-thumb]:bg-dark-green-background
+
+        
+        "
         value={inputValue}
         name={title}
         onChange={handleChange}
