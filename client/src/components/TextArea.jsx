@@ -6,7 +6,7 @@ export default function TextArea({
   inputValue,
   handleChange,
   handleKeyDown,
-  aiResponse
+  aiResponse,
 }) {
   const [tooltip, setTooltip] = useState(false);
 
