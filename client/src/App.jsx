@@ -47,7 +47,10 @@ function App() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (stepNumber === 4) return;
+      if (stepNumber === 4) {
+        handleSubmit(e);
+        return;
+      }
       handleContinue();
     }
   };
