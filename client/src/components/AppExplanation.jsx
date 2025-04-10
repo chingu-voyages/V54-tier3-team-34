@@ -77,7 +77,7 @@ export default function AppExplanation({ setExplanationOpen }) {
           <div className="mt-10 text-xs md:mt-24 md:text-base">
             {slides[slide]}
           </div>
-          <div className="absolute bottom-20 flex gap-10 text-white md:bottom-30">
+          <div className="absolute bottom-10 flex gap-10 text-white md:bottom-30">
             <div
               className={`cursor-pointer text-2xl hover:text-black ${slide === 0 && "invisible"}`}
               onClick={handlePrevSlide}
