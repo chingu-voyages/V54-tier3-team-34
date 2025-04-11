@@ -6,6 +6,7 @@
   
   .markdown-content h1, .markdown-content h2, .markdown-content h3 {
     margin: 1.5em 0 0.8em;
+    font-weight: 500;
   }
 
   .markdown-content ul>li{
