@@ -7,7 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
-import { generateWithGemini } from "./ai-model";
+import { generateAnswer } from "./services/ai-agent.js";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -82,7 +82,7 @@ function App() {
     // if all data is present, make api call
     setIsLoading(true);
     try {
-      const response = await generateWithGemini(formData); // we can change this logic later to dinamicly select the AI model
+      const response = await generateAnswer(formData); // we can change this logic later to dinamicly select the AI model
       setAiResponse(response);
     } catch (error) {
       console.error("Error fetching AI response:", error);
