@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import AppExplanation from "./AppExplanation";
 
-export default function Header({ explanationOpen, setExplanationOpen }) {
-  //  const [explanationOpen, setExplanationOpen] = useState(false);
-
+export default function Header({ setExplanationOpen }) {
   const date = new Date();
   const formattedDate = date.toLocaleDateString("en-US", {
     year: "numeric",

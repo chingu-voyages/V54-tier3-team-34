@@ -100,9 +100,7 @@ function App() {
       {explanationOpen && (
         <AppExplanation setExplanationOpen={setExplanationOpen} />
       )}
-      <Header
-        explanationOpen={explanationOpen}
-        setExplanationOpen={setExplanationOpen}
+      <Header setExplanationOpen={setExplanationOpen}
       />
       <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
@@ -113,7 +111,6 @@ function App() {
         ) : (
           <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
             <h2 className="text-center font-medium">
-              {" "}
               Start prompting smarter.
             </h2>
             Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
