@@ -2,6 +2,23 @@
 
 @theme {
   --font-tektur: Tektur, sans-serif;
+  --font-paragraph: Ubuntu, sans-serif;
+
+  --color-dark-backround: hsl(150, 17%, 2%);
+  --color-dark-text: hsl(150, 17%, 2%);
+  
+  --color-dark-green-shade: hsl(144, 61%, 10%);
+  --color-dark-gray-shade: hsl(150, 7.14%, 10.98%);
+
+  --color-primary-green: hsl(144.18, 100%, 35%);
+  --color-primary-green-darker-shade: hsl(144.3, 96.8%, 24.51%);
+  --color-accent-green: hsl(144.18, 100%, 40%);
+  
+  --color-dark-green-background: hsl(150, 17%, 5%);
+  --color-green-background-shade: hsl(150, 17%, 10%);
+  
+  --color-white-text: hsl(140, 23%, 95%);
+
 }
 
 .penta {
@@ -49,5 +66,7 @@
 }
 
 .text-bubble {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
+
+  clip-path: polygon(0 0,100% 0,100% 100%,0 0);
+
 }

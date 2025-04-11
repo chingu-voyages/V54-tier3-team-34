@@ -1,66 +1,68 @@
 .markdown-content {
-  max-width: 1000px;
-  margin: 20px;
-  padding: 20px;
-}
+    max-width: 1000px;
+    margin: 20px; 
+    padding: 20px;
+  }
+  
+  .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+    margin: 1.5em 0 0.8em;
+  }
 
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3 {
-  margin: 1.5em 0 0.8em;
-}
+  .markdown-content ul>li{
+    list-style: initial;
+  }
 
-.markdown-content h1 {
-  font-size: 2em;
-}
-.markdown-content h2 {
-  font-size: 1.7em;
-}
-.markdown-content h3 {
-  font-size: 1.4em;
-}
+  .markdown-content ol>li{
+    list-style: decimal;
+  }
+  
+  .markdown-content p {
+    margin-bottom: 1rem;
+  }
 
-.markdown-content pre {
-  background: #1c1917;
-  padding: 15px;
-  overflow-x: auto;
-  margin: 1em 0;
-}
-
-.markdown-content code {
-  font-family: monospace;
-}
-
-.markdown-content table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-}
-
-.markdown-content td,
-.markdown-content th {
-  border: 1px solid #4a5568;
-  padding: 8px;
-  text-align: left;
-}
-
-.markdown-content ul,
-.markdown-content ol {
-  padding-left: 1.5em;
-  margin: 1em 0;
-}
-
-.markdown-content li {
-  margin: 0.5em 0;
-}
-
-.markdown-content a {
-  text-decoration: underline;
-}
-
-.markdown-content blockquote {
-  border-left: 4px solid #48bb78;
-  padding-left: 1em;
-  margin: 1em 0;
-  color: #a0aec0;
-}
+  .markdown-content h1 { font-size: 2em; }
+  .markdown-content h2 { font-size: 1.7em; }
+  .markdown-content h3 { font-size: 1.4em; }
+  
+  .markdown-content pre {
+    background: #1c1917;
+    padding: 15px;
+    overflow-x: auto;
+    margin: 1em 0;
+  }
+  
+  .markdown-content code {
+    font-family: monospace;
+  }
+  
+  .markdown-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+  }
+  
+  .markdown-content td, .markdown-content th {
+    border: 1px solid #4a5568;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .markdown-content ul, .markdown-content ol {
+    padding-left: 1.5em;
+    margin: 1em 0;
+  }
+  
+  .markdown-content li {
+    margin: 0.5em 0;
+  }
+  
+  .markdown-content a {
+    text-decoration: underline;
+  }
+  
+  .markdown-content blockquote {
+    border-left: 4px solid #48bb78;
+    padding-left: 1em;
+    margin: 1em 0;
+    color: #a0aec0;
+  }
