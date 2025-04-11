@@ -20,8 +20,13 @@ function App() {
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
   const [errorMessages, setErrorMessages] = useState({});
-  const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [chatHistory, setChatHistory] = useState([]);
+
+
+
+
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -82,11 +87,23 @@ function App() {
     // if all data is present, make api call
     setIsLoading(true);
     try {
+
+      const userPrompt = `Persona: ${formData.persona}, Context: ${formData.context}, Task: ${formData.task}, Output: ${formData.output}, Constraint: ${formData.constraint}`;
+
       const response = await generateAnswer(formData); // we can change this logic later to dinamicly select the AI model
-      setAiResponse(response);
+
+      setChatHistory((prev) => [
+        ...prev,
+        { role: "user", text: userPrompt },
+        { role: "ai", text: response },
+      ]);
+
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      setAiResponse("**Error:** Unable to fetch response");
+      setChatHistory((prev) => [
+        ...prev,
+        { role: "ai", text: "**Error:** Unable to fetch response" },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -96,21 +113,7 @@ function App() {
     <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
       <Header />
       <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl flex flex-col justify-end ">
-        {/* if there is output */}
-        {isLoading ? (
-          <OutputField response={"Loading..."} />
-        ) : aiResponse ? (
-          <OutputField response={aiResponse} />
-        ) : (
-          <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
-            <h2 className="text-center font-medium">
-              {" "}
-              Start prompting smarter.
-            </h2>
-            Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
-            to craft clear, effective prompts in just five steps.{" "}
-          </div>
-        )}
+      <OutputField chatHistory={chatHistory} isLoading={isLoading} />
         <div className="bg-dark-green-background sticky bottom-0 flex flex-col items-stretch gap-4 pb-2">
           <form onSubmit={handleSubmit} noValidate>
             <div
