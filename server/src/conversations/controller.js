@@ -15,7 +15,7 @@ export async function createConversation(req, res) {
 
   try {
     const prompt = makePrompt(promptInfo);
-    await prompt.generateAnswer();
+    await prompt.generateAnswerAsync();
 
     const history = [
       {

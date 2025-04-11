@@ -1,5 +1,5 @@
 import { makeId, isValidId } from "../../db/db.js";
-import aiAgent from "./ai-agent.js";
+import { chatWithGemini } from "./ai-agent.js";
 
 export function makePrompt({
   id = makeId(),
@@ -53,13 +53,16 @@ export function makePrompt({
     getAnswer: () => answer,
     getCreatedAt: () => createdAt,
     getUpdatedAt: () => updatedAt,
-    generateAnswer: async () => {
-      answer = await aiAgent.answerWithGemini({
-        constraint,
-        context,
-        format,
-        persona,
-        task,
+    async generateAnswerAsync(history = []) {
+      if (!Array.isArray(history)) {
+        throw new Error(
+          `expected history to be an array, but ${typeof history} was received`,
+        );
+      }
+
+      answer = await chatWithGemini({
+        history,
+        promptData: { constraint, context, format, persona, task },
       });
     },
   });

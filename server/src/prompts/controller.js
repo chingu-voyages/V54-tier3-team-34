@@ -1,5 +1,6 @@
 import { makePrompt } from "../prompts/prompt.js";
 import repository from "./repository.js";
+import conversationRepository from "../conversations/repository.js";
 
 export default { createPrompt };
 
@@ -15,7 +16,14 @@ export async function createPrompt(req, res) {
 
   try {
     const prompt = makePrompt(promptInfo);
-    await prompt.generateAnswer();
+
+    const conversation = await conversationRepository.get({ hash });
+    if (!conversation) {
+      res.status(404).send();
+      return;
+    }
+
+    await prompt.generateAnswerAsync(conversation.history);
 
     const saved = await repository.insert({
       conversationHash: hash,
