@@ -62,7 +62,7 @@ export default function AppExplanation({ setExplanationOpen }) {
     setSlide((prev) => (prev += 1));
   };
   return (
-    <div className="absolute inset-0 z-[101] flex items-center justify-center bg-dark-backround/60">
+    <div className="fixed inset-0 z-[101] flex items-center justify-center bg-dark-backround/60">
       <div className="penta relative z-[110] flex aspect-square w-[400px] flex-col items-center bg-primary-green md:w-[600px]">
         <div
           className="absolute top-3 left-1/2 -translate-x-1/2 cursor-pointer font-bold"
@@ -78,7 +78,7 @@ export default function AppExplanation({ setExplanationOpen }) {
           <div className="mt-10 text-xs md:mt-24 md:text-base">
             {slides[slide]}
           </div>
-          <div className="absolute bottom-20 flex gap-10 md:bottom-30 text-dark-text">
+          <div className="absolute bottom-10 flex gap-10 md:bottom-30 text-dark-text">
             <button
               className={`cursor-pointer text-5xl hover:text-white-text ${slide === 0 && "invisible"}`}
 

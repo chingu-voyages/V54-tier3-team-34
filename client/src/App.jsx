@@ -8,6 +8,7 @@ import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
 import { generateWithGemini } from "./ai-model";
+import AppExplanation from "./components/AppExplanation";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -22,6 +23,8 @@ function App() {
   const [errorMessages, setErrorMessages] = useState({});
   const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [explanationOpen, setExplanationOpen] = useState(false);
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -93,9 +96,13 @@ function App() {
   };
 
   return (
-    <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
-      <Header />
-      <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl flex flex-col justify-end ">
+    <div className="flex min-h-screen flex-col items-center bg-black">
+      {explanationOpen && (
+        <AppExplanation setExplanationOpen={setExplanationOpen} />
+      )}
+      <Header setExplanationOpen={setExplanationOpen}
+      />
+      <div className="w-full max-w-[1000px] flex-1 border-green-500">
         {/* if there is output */}
         {isLoading ? (
           <OutputField response={"Loading..."} />
@@ -104,7 +111,6 @@ function App() {
         ) : (
           <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
             <h2 className="text-center font-medium">
-              {" "}
               Start prompting smarter.
             </h2>
             Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
@@ -149,6 +155,7 @@ function App() {
           />
         </div>
       </div>
+
       {/* initial button */}
       {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
         generate
