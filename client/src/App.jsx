@@ -189,7 +189,7 @@ function App() {
                 />
               </div>
             </div>
-            <GenerateButton formData={formData} />
+            <GenerateButton formData={formData} disabled={isLoading} />
           </form>
           <ProgressBar
             steps={steps}
