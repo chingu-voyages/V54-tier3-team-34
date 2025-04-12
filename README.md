@@ -52,10 +52,8 @@
 
 ## Our Team
 
-- Rafael Vecchi: [GitHub](https://github.com/VecchiR) / [LinkedIn](https://www.linkedin.com/in/rafaelvecchisilva/)
-- Greg Minezzi: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregoryminezzi)
-- Anita Boakye-Yiadom: [GitHub](https://github.com/AnitaBoakye) / [LinkedIn](https://linkedin.com/in/anitaboakyeyiadom)
 - Anas Maddah: [GitHub](https://github.com/snowbytes) / [LinkedIn - TBD](https://linkedin.com/)
-- Abdulsamad Yusuf: [GitHub](https://github.com/samad13) / [LinkedIn](https://www.linkedin.com/in/abdulsamad-yusuf-ba006)
-- Kosisochukwu Azubogu: [GitHub](https://github.com/azubogukosiso) / [LinkedIn](https://linkedin.com/in/azubogu-kosisochukwu)
+- Anita Boakye-Yiadom: [GitHub](https://github.com/AnitaBoakye) / [LinkedIn](https://linkedin.com/in/anitaboakyeyiadom)
+- Greg Minezzi: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregoryminezzi)
 - Pat Okwu: [GitHub](https://github.com/SnowmanP423)
+- Rafael Vecchi: [GitHub](https://github.com/VecchiR) / [LinkedIn](https://www.linkedin.com/in/rafaelvecchisilva/)
