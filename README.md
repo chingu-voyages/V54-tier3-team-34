@@ -1,44 +1,48 @@
 # Penta AI
 
-## Getting Started
+> Bringing structure to the chaos of prompt engineering - Check out the live version [here](https://v54-tier3-team-34-production.up.railway.app/)
 
-> Check out the live version [here](https://v54-tier3-team-34-production.up.railway.app/)!
+## Prerequisites
 
-### Prerequisites
+- [Node.js >= 16.9](https://nodejs.org/en)
+- [A running Mongodb database](https://www.mongodb.com/)
+- [A Gemini API key](https://ai.google.dev/gemini-api/docs/api-key)
 
-- [Node.js](https://nodejs.org/en/download)
-
-### Installation
+## Setting up Dev
 
 1. Clone this project:
 
    ```sh
-   git clone https://github.com/chingu-voyages/V54-tier3-team-34.git
+   git clone https://github.com/chingu-voyages/V54-tier3-team-34.git && \
+   cd v54-tier3-team-34
    ```
 
-2. install the dependencies
+2. Install the dependencies
 
    ```sh
-   npm ci --prefix ./client
+   npm ci --prefix client
+   npm ci --prefix server
    ```
 
-3. run the dev server
+3. Make a copy of `.env.example` named `.env` in both folders and fill the variables inside appropriately
+
+4. Run the dev server from both folders
 
    ```sh
-   npm run dev
+   npm run dev --prefix client
    ```
+
+   ```sh
+   npm run dev --prefix server
+   ```
+
+5. open the client's localhost url that the terminal shows
 
 ## Team Documents & Links
 
+- [Trello Board](https://trello.com/b/rVEhCs7Z/pentagram-ai-assistant)
 - [Meeting notes](./docs/meeting-notes.md)
 - [Team Decision Log](./docs/decision-log.md)
-
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
 
 ## Our Team
 
@@ -49,20 +53,3 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 - Abdulsamad Yusuf: [GitHub](https://github.com/samad13) / [LinkedIn](https://www.linkedin.com/in/abdulsamad-yusuf-ba006)
 - Kosisochukwu Azubogu: [GitHub](https://github.com/azubogukosiso) / [LinkedIn](https://linkedin.com/in/azubogu-kosisochukwu)
 - Pat Okwu: [GitHub](https://github.com/SnowmanP423)
-
----
-
-## voyage-tasks (Original Readme)
-
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
-
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
-
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
-
-> Own it & Make it your Own!
