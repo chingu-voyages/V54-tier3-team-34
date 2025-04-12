@@ -5,16 +5,29 @@ import remarkGfm from "remark-gfm"; // Adds GFM (Github Flavored Markdown) suppo
 
 import "../markdown.css"; // [WIP] basic styling for the HTML generated from the AI's markdown response
 
-export default function OutputField({ response }) {
+
+export default function OutputField({ chatHistory }) {
   return (
-    <div className="font-paragraph font-normal markdown-content mx-1 mt-5 flex-1  p-3 tracking-wider text-white-text">
-      {/* // This is how we use ReactMarkdown with the plugins we need */}
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeSanitize]}
-      >
-        {response}
-      </ReactMarkdown>
+    <div
+    className="font-paragraph font-normal markdown-content mx-1 mt-5 flex-1 p-3 tracking-wider text-white-text">
+      {chatHistory.length > 0 ? (
+        chatHistory.map((entry, index) => (
+          <div key={index} className={`mb-4 ${entry.role === "user" ? "text-primary-green" : "text-white-text"}`}>
+            <strong>{entry.role === "user" ? "You:" : "AI:"}</strong>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeSanitize]}
+            >
+              {entry.text}
+            </ReactMarkdown>
+          </div>
+        ))
+      ) : (
+        <>
+          <h2 className="text-center font-medium">Start prompting smarter.</h2>
+          Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework to craft clear, effective prompts in just five steps.
+        </>
+      )}
     </div>
   );
 }

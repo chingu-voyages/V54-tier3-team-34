@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import TextArea from "./components/TextArea";
@@ -20,8 +20,19 @@ function App() {
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
   const [errorMessages, setErrorMessages] = useState({});
-  const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [chatHistory, setChatHistory] = useState([]);
+
+  const scroller = useRef(null);
+
+  useEffect(() => {
+    scroller.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  });
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -79,14 +90,38 @@ function App() {
       return;
     }
 
-    // if all data is present, make api call
+    const userPrompt = `Persona: ${formData.persona}, Context: ${formData.context}, Task: ${formData.task}, Output: ${formData.output}, Constraint: ${formData.constraint}`;
+
+    // Add the user's prompt to the chat history immediately
+    setChatHistory((prev) => [...prev, { role: "user", text: userPrompt }]);
+
+    // Add a "Loading..." placeholder to the chat history
+    const loadingMessageIndex = chatHistory.length + 1;
+    setChatHistory((prev) => [...prev, { role: "ai", text: "Loading..." }]);
+
     setIsLoading(true);
     try {
-      const response = await generateAnswer(formData); // we can change this logic later to dinamicly select the AI model
-      setAiResponse(response);
+      const response = await generateAnswer(formData); // Fetch AI response
+
+      // Replace the "Loading..." placeholder with the AI's response
+      setChatHistory((prev) =>
+        prev.map((entry, index) =>
+          index === loadingMessageIndex
+            ? { role: "ai", text: response }
+            : entry,
+        ),
+      );
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      setAiResponse("**Error:** Unable to fetch response");
+
+      // Replace the "Loading..." placeholder with an error message
+      setChatHistory((prev) =>
+        prev.map((entry, index) =>
+          index === loadingMessageIndex
+            ? { role: "ai", text: "**Error:** Unable to fetch response" }
+            : entry,
+        ),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -95,22 +130,8 @@ function App() {
   return (
     <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
       <Header />
-      <div className="border-primary-green w-full max-w-[1000px] flex-1 md:w-3xl flex flex-col justify-end ">
-        {/* if there is output */}
-        {isLoading ? (
-          <OutputField response={"Loading..."} />
-        ) : aiResponse ? (
-          <OutputField response={aiResponse} />
-        ) : (
-          <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
-            <h2 className="text-center font-medium">
-              {" "}
-              Start prompting smarter.
-            </h2>
-            Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
-            to craft clear, effective prompts in just five steps.{" "}
-          </div>
-        )}
+      <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
+        <OutputField chatHistory={chatHistory} isLoading={isLoading} />
         <div className="bg-dark-green-background sticky bottom-0 flex flex-col items-stretch gap-4 pb-2">
           <form onSubmit={handleSubmit} noValidate>
             <div
@@ -149,12 +170,11 @@ function App() {
           />
         </div>
       </div>
-      {/* initial button */}
-      {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
-        generate
-      </button> */}
-      {/* output already visible */}
-      <footer className="bg-dark-backround hidden w-full translate-y-full text-center md:block -z-10">
+
+      {/* self-closing div to implement auto-scrolling  */}
+      <div ref={scroller} />
+
+      <footer className="bg-dark-backround -z-10 hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
     </div>
