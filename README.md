@@ -47,8 +47,8 @@
 ## Team Documents & Links
 
 - [Trello Board](https://trello.com/b/rVEhCs7Z/pentagram-ai-assistant)
-- [Meeting notes](./docs/meeting-notes.md)
-- [Team Decision Log](./docs/decision-log.md)
+- [Meetings' notes](./docs/meetings-notes.md)
+- [Team Decisions' Log](./docs/decisions-log.md)
 
 ## Our Team
 
