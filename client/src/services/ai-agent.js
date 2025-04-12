@@ -21,7 +21,7 @@ export async function generateAnswer({
     headers: { "Content-Type": "application/json" },
   })
     .then((response) => response.json())
-    .then((conversation) => conversation.history.at(-1).answer);
+    .then(({ hash, history }) => ({ hash, answer: history.at(-1).answer }));
 }
 
 export async function getChatHistory({ hash }) {
