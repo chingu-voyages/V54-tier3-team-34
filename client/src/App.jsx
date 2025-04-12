@@ -42,12 +42,13 @@ function App() {
 
     getChatHistory({ hash })
       .then(({ history }) => {
-        setChatHistory(
-          history.flatMap((prompt) => [
+        setChatHistory((prev) => [
+          ...prev,
+          ...history.flatMap((prompt) => [
             { role: "user", text: makeUserMessage(prompt) },
             { role: "ai", text: prompt.answer },
           ]),
-        );
+        ]);
       })
       .catch((error) => {
         if (error.cause.responseStatus == 404) {
