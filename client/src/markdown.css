@@ -21,6 +21,11 @@
     margin-bottom: 1rem;
   }
 
+  .markdown-content .user p:last-child,
+  .markdown-content .ai p:last-child {
+    margin-bottom: 0;
+  }
+
   .markdown-content h1 { font-size: 2em; }
   .markdown-content h2 { font-size: 1.7em; }
   .markdown-content h3 { font-size: 1.4em; }
