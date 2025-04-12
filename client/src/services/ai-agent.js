@@ -1,4 +1,4 @@
-export default { generateAnswer };
+export default { generateAnswer, getChatHistory };
 
 const BASE_URL = "/api/v1";
 
@@ -22,4 +22,14 @@ export async function generateAnswer({
   })
     .then((response) => response.json())
     .then((conversation) => conversation.history.at(-1).answer);
+}
+
+export async function getChatHistory({ hash }) {
+  const response = await fetch(`${BASE_URL}/conversations/${hash}`)
+
+  if (response.status === 404) {
+    throw new Error("Conversation not found!", { cause: { responseStatus: response.status }})
+  }
+
+  return response.json()
 }

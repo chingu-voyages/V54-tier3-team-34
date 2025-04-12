@@ -7,7 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
-import { generateAnswer } from "./services/ai-agent.js";
+import { generateAnswer, getChatHistory } from "./services/ai-agent.js";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -33,6 +33,28 @@ function App() {
       inline: "nearest",
     });
   });
+
+  useEffect(() => {
+    const hash = window.location.pathname.slice(1);
+    if (!hash) {
+      return;
+    }
+
+    getChatHistory({ hash })
+      .then(({ history }) => {
+        setChatHistory(
+          history.flatMap((prompt) => [
+            { role: "user", text: makeUserMessage(prompt) },
+            { role: "ai", text: prompt.answer },
+          ]),
+        );
+      })
+      .catch((error) => {
+        if (error.cause.responseStatus == 404) {
+          window.history.replaceState(null, "", "/");
+        }
+      });
+  }, []);
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -90,7 +112,7 @@ function App() {
       return;
     }
 
-    const userPrompt = `Persona: ${formData.persona}, Context: ${formData.context}, Task: ${formData.task}, Output: ${formData.output}, Constraint: ${formData.constraint}`;
+    const userPrompt = makeUserMessage(formData);
 
     // Add the user's prompt to the chat history immediately
     setChatHistory((prev) => [...prev, { role: "user", text: userPrompt }]);
@@ -182,3 +204,7 @@ function App() {
 }
 
 export default App;
+
+function makeUserMessage(prompt) {
+  return `Persona: ${prompt.persona}, Context: ${prompt.context}, Task: ${prompt.task}, Output: ${prompt.output}, Constraint: ${prompt.constraint}`;
+}
