@@ -123,13 +123,16 @@ function App() {
 
     setIsLoading(true);
     try {
-      const response = await generateAnswer(formData); // Fetch AI response
+      const { hash, answer } = await generateAnswer(formData); // Fetch AI response
+
+      // update the url
+      window.history.pushState(null, '', hash);
 
       // Replace the "Loading..." placeholder with the AI's response
       setChatHistory((prev) =>
         prev.map((entry, index) =>
           index === loadingMessageIndex
-            ? { role: "ai", text: response }
+            ? { role: "ai", text: answer }
             : entry,
         ),
       );
