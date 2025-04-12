@@ -170,12 +170,10 @@ function App() {
           />
         </div>
       </div>
-      {/* initial button */}
-      {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
-        generate
-        </button> */}
+
+      {/* self-closing div to implement auto-scrolling  */}
       <div ref={scroller} />
-      {/* output already visible */}
+
       <footer className="bg-dark-backround -z-10 hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
