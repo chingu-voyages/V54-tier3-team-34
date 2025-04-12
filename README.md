@@ -2,6 +2,12 @@
 
 > Bringing structure to the chaos of prompt engineering - Check out the live version [here](https://v54-tier3-team-34-production.up.railway.app/)
 
+## Features
+
+- [x] [Basic functionality outlined in chingu's readme](https://github.com/chingu-voyages/voyage-project-aihelper?tab=readme-ov-file#functionality)
+- [x] Interact with the LLM in chat format, and receive answers that remember previous dialogue
+- [x] Access existing chats if you have the corresponding url
+
 ## Prerequisites
 
 - [Node.js >= 16.9](https://nodejs.org/en)
