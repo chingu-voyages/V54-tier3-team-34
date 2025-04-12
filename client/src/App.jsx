@@ -78,14 +78,18 @@ function App() {
 
   // click continue button when user hits enter key
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (stepNumber === 4) {
-        handleSubmit(e);
-        return;
-      }
-      handleContinue();
+    if (e.key !== "Enter") {
+      return;
     }
+
+    e.preventDefault();
+
+    if (stepNumber !== 4) {
+      handleContinue();
+      return;
+    }
+
+    handleSubmit(e);
   };
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
@@ -105,6 +109,10 @@ function App() {
   // handle submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isLoading) {
+      return;
+    }
 
     const missingData = validateInput();
     if (Object.keys(missingData).length) {
@@ -184,7 +192,7 @@ function App() {
                 />
               </div>
             </div>
-            <GenerateButton formData={formData} />
+            <GenerateButton formData={formData} disabled={isLoading} />
           </form>
           <ProgressBar
             steps={steps}
