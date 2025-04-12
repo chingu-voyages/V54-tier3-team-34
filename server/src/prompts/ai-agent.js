@@ -27,12 +27,12 @@ export async function chatWithGemini({ history = [], promptData }) {
 
 function getPromptText({ constraint, context, format, persona, task }) {
   return (
-    "Complete the following task as described below: \n{\n" +
+    "Generate a response fully in markdown format (with multiple level headings when appropriate) for the following prompt built using the Pentagram Framework for prompt engineering. Do not mention the Pentragram Framework or that the response is being formatted as markdown: \n{\n" +
     `  constraint: ${constraint}\n` +
     `  context: ${context}\n` +
     `  format: ${format}\n` +
     `  persona: ${persona}\n` +
     `  task: ${task}\n` +
     `}`
-  );
+);
 }
