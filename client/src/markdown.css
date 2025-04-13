@@ -19,8 +19,8 @@
     margin-bottom: 1rem;
   }
 
-  .markdown-content .user p:last-child,
-  .markdown-content .ai p:last-child {
+  .markdown-content .user p:nth-last-child(2),
+  .markdown-content .ai p:nth-last-child(2) {
     margin-bottom: 0;
   }
 

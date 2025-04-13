@@ -10,7 +10,11 @@ export default function OutputField({ chatHistory, deleteOutput }) {
     <div className="font-paragraph markdown-content text-white-text mt-5 flex flex-1 flex-col p-3 font-normal tracking-wider">
       {chatHistory.length > 0 ? (
         chatHistory.map((prompt) => (
-          <OutputItem key={prompt.id} prompt={prompt} deleteOutput={deleteOutput} />
+          <OutputItem
+            key={prompt.id}
+            prompt={prompt}
+            deleteOutput={deleteOutput}
+          />
         ))
       ) : (
         <div>
@@ -24,24 +28,30 @@ export default function OutputField({ chatHistory, deleteOutput }) {
 }
 
 function OutputItem({ prompt, deleteOutput }) {
-  const [isLoading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
 
   async function handleDeleteOutput() {
-    setLoading(true)
-    await deleteOutput({ promptId: prompt.id })
-    setLoading(false)
+    setLoading(true);
+    await deleteOutput({ promptId: prompt.id });
+    setLoading(false);
   }
 
   return (
     <>
-      <div className="user bg-baloon-user text-white-text mb-4 flex max-w-9/10 flex-col self-end rounded-2xl px-8 py-5">
-        <button onClick={handleDeleteOutput} disabled={isLoading}>delete</button>
+      <div className="user bg-baloon-user text-dark-green-background mb-4 flex max-w-9/10 flex-col self-end rounded-2xl px-8 py-5">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeSanitize]}
         >
           {makeUserMessage(prompt)}
         </ReactMarkdown>
+        <button
+          onClick={handleDeleteOutput}
+          disabled={isLoading}
+          className="cursor-pointer self-start mt-1"
+        >
+          <span className="material-symbols-outlined hover:scale-110 duration-100">delete</span>
+        </button>
       </div>
       <div className="ai bg-baloon-ai text-white-text mb-4 flex max-w-9/10 flex-col self-start rounded-2xl px-8 py-5">
         <ReactMarkdown
