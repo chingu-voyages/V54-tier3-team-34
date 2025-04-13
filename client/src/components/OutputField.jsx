@@ -12,7 +12,7 @@ export default function OutputField({ chatHistory }) {
     className="flex flex-col font-paragraph font-normal markdown-content mt-5 flex-1 p-3 tracking-wider text-white-text">
       {chatHistory.length > 0 ? (
         chatHistory.map((entry, index) => (
-          <div key={index} className={`flex flex-col rounded-2xl  py-5 px-8 max-w-9/10  mb-4 text-white-text  ${entry.role === "user" ? "bg-baloon-user  self-end" : "bg-baloon-ai  self-start"} ${entry.role}`}>
+          <div key={index} className={`flex flex-col rounded-2xl  py-5 px-8 max-w-9/10  mb-4   ${entry.role === "user" ? "bg-baloon-user  self-end text-dark-green-background " : "bg-baloon-ai  self-start text-white-text"} ${entry.role}`}>
             {/* <strong>{entry.role === "user" ? "You:" : "AI:"}</strong> */}
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
