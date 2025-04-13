@@ -1,13 +1,15 @@
 import { useEffect, useState, useRef } from "react";
+
 import AppExplanation from "./components/AppExplanation";
 import Header from "./components/Header";
 import OutputField from "./components/OutputField";
 import Form from './components/Form'
 import Footer from "./components/Footer";
-import { getChatHistory } from "./services/ai-agent.js";
+import { getConversation } from "./services/ai-agent.js";
 
 export default function App() {
   const [explanationOpen, setExplanationOpen] = useState(false);
+  const [conversationHash, setConversationHash] = useState("")
   const [chatHistory, setChatHistory] = useState([]);
 
   const scroller = useRef(null);
@@ -26,15 +28,10 @@ export default function App() {
       return;
     }
 
-    getChatHistory({ hash })
-      .then(({ history }) => {
-        setChatHistory((prev) => [
-          ...prev,
-          ...history.flatMap((prompt) => [
-            { role: "user", text: makeUserMessage(prompt) },
-            { role: "ai", text: prompt.answer },
-          ]),
-        ]);
+    getConversation({ hash })
+      .then(({ hash, history }) => {
+        setConversationHash(hash)
+        setChatHistory(history)
       })
       .catch((error) => {
         if (error.cause.responseStatus == 404) {
@@ -48,22 +45,19 @@ export default function App() {
       {explanationOpen && (
         <AppExplanation setExplanationOpen={setExplanationOpen} />
       )}
-      <Header setExplanationOpen={setExplanationOpen}/>
-     
+
+      <Header setExplanationOpen={setExplanationOpen} />
+
       <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
         <OutputField chatHistory={chatHistory} />
-        <Form chatHistory={chatHistory} setChatHistory={setChatHistory} makeUserMessage={makeUserMessage} />
+        <Form conversationHash={conversationHash} setConversationHash={setConversationHash} setChatHistory={setChatHistory} />
         {/* self-closing div to implement auto-scrolling  */}
         <div ref={scroller} />
       </div>
- 
+
       <footer className="bg-dark-backround -z-10 hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
     </div>
   );
-}
-
-function makeUserMessage(prompt) {
-  return `Persona: ${prompt.persona}, Context: ${prompt.context}, Task: ${prompt.task}, Output: ${prompt.format}, Constraint: ${prompt.constraint}`;
 }

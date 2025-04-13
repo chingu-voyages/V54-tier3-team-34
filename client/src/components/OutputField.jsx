@@ -5,29 +5,47 @@ import remarkGfm from "remark-gfm"; // Adds GFM (Github Flavored Markdown) suppo
 
 import "../markdown.css"; // [WIP] basic styling for the HTML generated from the AI's markdown response
 
-
 export default function OutputField({ chatHistory }) {
   return (
-    <div
-    className="flex flex-col font-paragraph font-normal markdown-content mt-5 flex-1 p-3 tracking-wider text-white-text">
+    <div className="font-paragraph markdown-content text-white-text mt-5 flex flex-1 flex-col p-3 font-normal tracking-wider">
       {chatHistory.length > 0 ? (
-        chatHistory.map((entry, index) => (
-          <div key={index} className={`flex flex-col rounded-2xl  py-5 px-8 max-w-9/10  mb-4   ${entry.role === "user" ? "bg-baloon-user  self-end text-dark-green-background " : "bg-baloon-ai  self-start text-white-text"} ${entry.role}`}>
-            {/* <strong>{entry.role === "user" ? "You:" : "AI:"}</strong> */}
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeSanitize]}
-            >
-              {entry.text}
-            </ReactMarkdown>
-          </div>
+        chatHistory.map((prompt) => (
+          <OutputItem key={prompt.id} prompt={prompt} />
         ))
       ) : (
         <div>
           <h2 className="text-center font-medium">Start prompting smarter.</h2>
-          Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework to craft clear, effective prompts in just five steps.
+          Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
+          to craft clear, effective prompts in just five steps.
         </div>
       )}
     </div>
   );
+}
+
+function OutputItem({ prompt }) {
+  return (
+    <>
+      <div className="user bg-baloon-user text-white-text mb-4 flex max-w-9/10 flex-col self-end rounded-2xl px-8 py-5">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeSanitize]}
+        >
+          {makeUserMessage(prompt)}
+        </ReactMarkdown>
+      </div>
+      <div className="ai bg-baloon-ai text-white-text mb-4 flex max-w-9/10 flex-col self-start rounded-2xl px-8 py-5">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeSanitize]}
+        >
+          {prompt.answer}
+        </ReactMarkdown>
+      </div>
+    </>
+  );
+}
+
+function makeUserMessage(prompt) {
+  return `Persona: ${prompt.persona}, Context: ${prompt.context}, Task: ${prompt.task}, Output: ${prompt.format}, Constraint: ${prompt.constraint}`;
 }
