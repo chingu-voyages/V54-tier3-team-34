@@ -7,6 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
+import AppExplanation from "./components/AppExplanation";
 import { generateAnswer, getChatHistory } from "./services/ai-agent.js";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+  const [explanationOpen, setExplanationOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
 
   const scroller = useRef(null);
@@ -163,8 +165,12 @@ function App() {
 
   return (
     <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
-      <Header />
-      <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
+      {explanationOpen && (
+        <AppExplanation setExplanationOpen={setExplanationOpen} />
+      )}
+      <Header setExplanationOpen={setExplanationOpen}
+      />      
+        <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
         <OutputField chatHistory={chatHistory} isLoading={isLoading} />
         <div className="bg-dark-green-background sticky bottom-0 flex flex-col items-stretch gap-4 pb-2">
           <form onSubmit={handleSubmit} noValidate>
@@ -204,10 +210,8 @@ function App() {
           />
         </div>
       </div>
-
       {/* self-closing div to implement auto-scrolling  */}
       <div ref={scroller} />
-
       <footer className="bg-dark-backround -z-10 hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
