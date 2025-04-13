@@ -49,3 +49,13 @@ export async function addPrompt({ conversationHash, constraint, context, output,
 
   return response.json()
 }
+
+export async function deletePrompt({ conversationHash, promptId }) {
+  const response = await fetch(`${BASE_URL}/conversations/${conversationHash}/prompts/${promptId}`, {
+    method: "DELETE",
+  })
+
+  if (response.status >= 400) {
+    throw new Error(await (response.json()).message)
+  }
+}

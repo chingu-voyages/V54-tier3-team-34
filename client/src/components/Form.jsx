@@ -74,7 +74,6 @@ export default function Form({ conversationHash, setConversationHash, setChatHis
 
   // handle submit form
   const handleSubmit = async (e) => {
-    console.log('TRIGGERED')
     e.preventDefault();
 
     if (isLoading) {
