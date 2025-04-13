@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Button from "./components/Button";
 import Header from "./components/Header";
 import TextArea from "./components/TextArea";
@@ -7,8 +7,8 @@ import ProgressBar from "./components/ProgressBar";
 import GenerateButton from "./components/GenerateButton";
 import OutputField from "./components/OutputField";
 import { steps } from "./steps";
-import { generateAnswer } from "./services/ai-agent.js";
 import AppExplanation from "./components/AppExplanation";
+import { generateAnswer, getChatHistory } from "./services/ai-agent.js";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -21,10 +21,43 @@ function App() {
   const [stepNumber, setStepNumber] = useState(0);
   const [currentStep, setCurrentStep] = useState(steps[0]);
   const [errorMessages, setErrorMessages] = useState({});
-  const [aiResponse, setAiResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const [explanationOpen, setExplanationOpen] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+
+  const scroller = useRef(null);
+
+  useEffect(() => {
+    scroller.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  });
+
+  useEffect(() => {
+    const hash = window.location.pathname.slice(1);
+    if (!hash) {
+      return;
+    }
+
+    getChatHistory({ hash })
+      .then(({ history }) => {
+        setChatHistory((prev) => [
+          ...prev,
+          ...history.flatMap((prompt) => [
+            { role: "user", text: makeUserMessage(prompt) },
+            { role: "ai", text: prompt.answer },
+          ]),
+        ]);
+      })
+      .catch((error) => {
+        if (error.cause.responseStatus == 404) {
+          window.history.replaceState(null, "", "/");
+        }
+      });
+  }, []);
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -48,14 +81,18 @@ function App() {
 
   // click continue button when user hits enter key
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (stepNumber === 4) {
-        handleSubmit(e);
-        return;
-      }
-      handleContinue();
+    if (e.key !== "Enter") {
+      return;
     }
+
+    e.preventDefault();
+
+    if (stepNumber !== 4) {
+      handleContinue();
+      return;
+    }
+
+    handleSubmit(e);
   };
 
   // check each key and see if there is value, create error message. if all filled out, return empty string
@@ -76,47 +113,65 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (isLoading) {
+      return;
+    }
+
     const missingData = validateInput();
     if (Object.keys(missingData).length) {
       setErrorMessages(missingData);
       return;
     }
 
-    // if all data is present, make api call
+    const userPrompt = makeUserMessage(formData);
+
+    // Add the user's prompt to the chat history immediately
+    setChatHistory((prev) => [...prev, { role: "user", text: userPrompt }]);
+
+    // Add a "Loading..." placeholder to the chat history
+    const loadingMessageIndex = chatHistory.length + 1;
+    setChatHistory((prev) => [...prev, { role: "ai", text: "Loading..." }]);
+
     setIsLoading(true);
     try {
-      const response = await generateAnswer(formData); // we can change this logic later to dinamicly select the AI model
-      setAiResponse(response);
+      const { hash, answer } = await generateAnswer(formData); // Fetch AI response
+
+      // update the url
+      window.history.pushState(null, '', hash);
+
+      // Replace the "Loading..." placeholder with the AI's response
+      setChatHistory((prev) =>
+        prev.map((entry, index) =>
+          index === loadingMessageIndex
+            ? { role: "ai", text: answer }
+            : entry,
+        ),
+      );
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      setAiResponse("**Error:** Unable to fetch response");
+
+      // Replace the "Loading..." placeholder with an error message
+      setChatHistory((prev) =>
+        prev.map((entry, index) =>
+          index === loadingMessageIndex
+            ? { role: "ai", text: "**Error:** Unable to fetch response" }
+            : entry,
+        ),
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center bg-black">
+    <div className="bg-dark-green-background flex min-h-screen flex-col items-center gap-5">
       {explanationOpen && (
         <AppExplanation setExplanationOpen={setExplanationOpen} />
       )}
       <Header setExplanationOpen={setExplanationOpen}
-      />
-      <div className="w-full max-w-[1000px] flex-1 border-green-500">
-        {/* if there is output */}
-        {isLoading ? (
-          <OutputField response={"Loading..."} />
-        ) : aiResponse ? (
-          <OutputField response={aiResponse} />
-        ) : (
-          <div className="font-paragraph markdown-content text-white-text mx-1 mt-5 flex-1 p-3 font-normal tracking-wider">
-            <h2 className="text-center font-medium">
-              Start prompting smarter.
-            </h2>
-            Welcome to <strong>Penta AI</strong>. Follow the Pentagram Framework
-            to craft clear, effective prompts in just five steps.{" "}
-          </div>
-        )}
+      />      
+        <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
+        <OutputField chatHistory={chatHistory} isLoading={isLoading} />
         <div className="bg-dark-green-background sticky bottom-0 flex flex-col items-stretch gap-4 pb-2">
           <form onSubmit={handleSubmit} noValidate>
             <div
@@ -144,7 +199,7 @@ function App() {
                 />
               </div>
             </div>
-            <GenerateButton formData={formData} />
+            <GenerateButton formData={formData} disabled={isLoading} />
           </form>
           <ProgressBar
             steps={steps}
@@ -155,13 +210,9 @@ function App() {
           />
         </div>
       </div>
-
-      {/* initial button */}
-      {/* <button className="penta absolute right-1/2 bottom-5 h-28 w-28 translate-x-1/2 bg-green-500 text-lg font-bold opacity-50 drop-shadow-[3px_3px_0px_white] filter hover:drop-shadow-[1px_1px_0px_white] active:drop-shadow-[0px_0px_0px_white]">
-        generate
-      </button> */}
-      {/* output already visible */}
-      <footer className="bg-dark-backround hidden w-full translate-y-full text-center md:block -z-10">
+      {/* self-closing div to implement auto-scrolling  */}
+      <div ref={scroller} />
+      <footer className="bg-dark-backround -z-10 hidden w-full translate-y-full text-center md:block">
         <Footer />
       </footer>
     </div>
@@ -169,3 +220,7 @@ function App() {
 }
 
 export default App;
+
+function makeUserMessage(prompt) {
+  return `Persona: ${prompt.persona}, Context: ${prompt.context}, Task: ${prompt.task}, Output: ${prompt.output}, Constraint: ${prompt.constraint}`;
+}

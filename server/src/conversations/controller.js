@@ -41,7 +41,7 @@ export async function createConversation(req, res) {
       updatedAt: conversation.getUpdatedAt(),
     });
 
-    res.status(201).json(saved);
+    res.status(200).json(saved);
   } catch (error) {
     // TODO: handle each error case separately
     console.error("Error while trying to create a new conversatiexn", error);

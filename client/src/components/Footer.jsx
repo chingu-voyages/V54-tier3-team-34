@@ -6,13 +6,7 @@ export default function Footer() {
       <div className="grid grid-cols-2">
         <ul className="list-none">
           <li>
-            <a href="https://www.linkedin.com/in/anitaboakyeyiadom/" target="_blank" rel="noopener noreferrer" className="text-dark-text font-semibold">
-              Anita Boakye-Yiadom
-            </a>
-            - Scrum Master
-          </li>
-          <li>
-            <a href="https://github.com/snowbytes" target="_blank" rel="noopener noreferrer" className="text-dark-text font-semibold">
+            <a href="" className="text-dark-text font-semibold">
               Anas Maddah
             </a>
             - Developer
@@ -23,19 +17,25 @@ export default function Footer() {
             </a>
             - Developer
           </li>
-        </ul>
-        <ul className="list-none">
           <li>
-            <a href="https://github.com/SnowmanP423" target="_blank" rel="noopener noreferrer" className="text-dark-text font-semibold">
-              Pat Okwu
-            </a>
-            - Product Owner
-          </li>
-          <li>
-            <a href="https://github.com/VecchiR" target="_blank" rel="noopener noreferrer" className="text-dark-text font-semibold">
+            <a href="" className="text-dark-text font-semibold">
               Rafael Vecchi
             </a>
             - Developer
+          </li>
+        </ul>
+        <ul className="list-none">
+          <li>
+            <a href="#" className="text-dark-text font-semibold">
+              Anita Boakye-Yiadom
+            </a>
+            - Scrum Master
+          </li>
+          <li>
+            <a href="" className="text-dark-text font-semibold">
+              Pat Okwu
+            </a>
+            - Product Owner
           </li>
         </ul>
       </div>
