@@ -31,30 +31,30 @@ export default function AppExplanation({ setExplanationOpen }) {
       responses.
     </p>,
     <p className="font-paragraph">
-      <strong className="text-dark-text">Persona</strong> – Defines the role the AI
-      should take (e.g., 'You are a marketing expert...').
+      <strong className="text-dark-text">Persona</strong> – Defines the role the
+      AI should take (e.g., 'You are a marketing expert...').
     </p>,
     <p className="font-paragraph">
       <strong className="text-dark-text">Context</strong> – Provides background
       information for better understanding.
     </p>,
     <p className="font-paragraph">
-      <strong className="text-dark-text">Task</strong> – Clearly states what needs
-      to be done.
+      <strong className="text-dark-text">Task</strong> – Clearly states what
+      needs to be done.
     </p>,
     <p className="font-paragraph">
       <strong className="text-dark-text">Output</strong> – Specifies the desired
       format or response style.
     </p>,
     <p className="font-paragraph">
-      <strong className="text-dark-text">Constraints</strong> – Sets limitations or
-      additional instructions (e.g., word limit, tone).
+      <strong className="text-dark-text">Constraints</strong> – Sets limitations
+      or additional instructions (e.g., word limit, tone).
     </p>,
   ];
 
   const handlePrevSlide = () => {
     if (slide === 0) return;
-    setSlide((prev) => (prev -= 1));  
+    setSlide((prev) => (prev -= 1));
   };
 
   const handleNextSlide = () => {
@@ -62,32 +62,29 @@ export default function AppExplanation({ setExplanationOpen }) {
     setSlide((prev) => (prev += 1));
   };
   return (
-    <div className="fixed inset-0 z-[101] flex items-center justify-center bg-dark-backround/60">
-      <div className="penta relative z-[110] flex aspect-square w-[400px] flex-col items-center bg-primary-green md:w-[600px]">
+    <div className="bg-dark-backround/60 fixed inset-0 z-[101] flex items-center justify-center">
+      <div className="penta bg-primary-green relative z-[110] flex aspect-square w-[400px] flex-col items-center md:w-[600px]">
         <div
           className="absolute top-3 left-1/2 -translate-x-1/2 cursor-pointer font-bold"
           onClick={() => setExplanationOpen((prev) => !prev)}
         >
-          <button className="peer flex h-5 w-5 items-center justify-center rounded-full bg-dark-backround text-white-text hover:bg-white-text hover:text-dark-text">
+          <button className="peer bg-dark-backround text-white-text hover:bg-white-text hover:text-dark-text flex h-5 w-5 items-center justify-center rounded-full">
             X
           </button>
         </div>
 
-        <div className="mt-20 md:mt-30 flex flex-col items-center justify-center px-20">
-          <h2 className="text-lg md:text-2xl font-bold">Pentagram Framework</h2>
-          <div className="mt-10  md:mt-24 md:text-base">
-            {slides[slide]}
-          </div>
-          <div className="absolute bottom-10 flex gap-10 md:bottom-30 text-dark-text">
+        <div className="mt-20 flex flex-col items-center justify-center px-20 md:mt-30">
+          <h2 className="text-lg font-bold md:text-2xl">Pentagram Framework</h2>
+          <div className="mt-10 md:mt-24 md:text-base">{slides[slide]}</div>
+          <div className="text-dark-text absolute bottom-10 flex gap-10 md:bottom-30">
             <button
-              className={`cursor-pointer text-5xl hover:text-white-text ${slide === 0 && "invisible"}`}
-
+              className={`hover:text-white-text cursor-pointer text-5xl ${slide === 0 && "invisible"}`}
               onClick={handlePrevSlide}
             >
               ←
             </button>
             <button
-              className={`cursor-pointer text-5xl hover:text-white-text ${slide === 5 && "invisible"}`}
+              className={`hover:text-white-text cursor-pointer text-5xl ${slide === 5 && "invisible"}`}
               onClick={handleNextSlide}
             >
               →

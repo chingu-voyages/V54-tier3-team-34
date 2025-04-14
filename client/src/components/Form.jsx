@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
-import Button from "./Button"
-import GenerateButton from "./GenerateButton"
-import ProgressBar from "./ProgressBar"
-import TextArea from "./TextArea"
+import Button from "./Button";
+import GenerateButton from "./GenerateButton";
+import ProgressBar from "./ProgressBar";
+import TextArea from "./TextArea";
 import { steps } from "../steps";
 import { addPrompt, createConversation } from "../services/ai-agent.js";
 
-
-export default function Form({ conversationHash, setConversationHash, setChatHistory }) {
+export default function Form({
+  conversationHash,
+  setConversationHash,
+  setChatHistory,
+}) {
   const [formData, setFormData] = useState({
     persona: "",
     context: "",
@@ -20,7 +23,6 @@ export default function Form({ conversationHash, setConversationHash, setChatHis
   const [stepNumber, setStepNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
-
 
   // change currentStep everytime stepNumber changes
   useEffect(() => {
@@ -96,35 +98,37 @@ export default function Form({ conversationHash, setConversationHash, setChatHis
         format: formData.output,
         constraint: formData.constraint,
         answer: "Loading...",
-      }
-    ])
+      },
+    ]);
 
     setIsLoading(true);
     try {
       if (!conversationHash) {
         // create a new conversation
-        const conversation = await createConversation(formData)
-        window.history.pushState(null, '', conversation.hash)
-        
-        setConversationHash(conversation.hash)
-        setChatHistory(conversation.history)
-        return
+        const conversation = await createConversation(formData);
+        window.history.pushState(null, "", conversation.hash);
+
+        setConversationHash(conversation.hash);
+        setChatHistory(conversation.history);
+        return;
       }
-      
+
       // otherwise add the prompt to the conversation
-      const prompt = await addPrompt({ conversationHash, ...formData })
+      const prompt = await addPrompt({ conversationHash, ...formData });
       // replace the client prompt we added with the server's
-      setChatHistory(prev => [...prev.slice(0, prev.length - 1), prompt ])
+      setChatHistory((prev) => [...prev.slice(0, prev.length - 1), prompt]);
     } catch (error) {
       console.error("Error fetching AI response:", error);
-      
-      setChatHistory(prev => prev.map((prompt, index) => {
-        if (index === prev.length - 1) {
-          return {...prompt, answer: "**Error:** Unable to fetch response" }
-        }
 
-        return prompt
-      }))
+      setChatHistory((prev) =>
+        prev.map((prompt, index) => {
+          if (index === prev.length - 1) {
+            return { ...prompt, answer: "**Error:** Unable to fetch response" };
+          }
+
+          return prompt;
+        }),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -168,5 +172,5 @@ export default function Form({ conversationHash, setConversationHash, setChatHis
         errorMessages={errorMessages}
       />
     </div>
-  )
+  );
 }

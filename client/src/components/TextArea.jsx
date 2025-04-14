@@ -47,7 +47,7 @@ export default function TextArea({
       </div>
       {/* tooltip */}
       <div
-        className={`shadow-xl shadow-[#2b2b2b73] font-paragraph bg-primary-green pointer-events-none absolute bottom-46 right-3 z-100 min-h-18 rounded-2xl p-6 tracking-wider opacity-0 transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
+        className={`font-paragraph bg-primary-green pointer-events-none absolute right-3 bottom-46 z-100 min-h-18 rounded-2xl p-6 tracking-wider opacity-0 shadow-xl shadow-[#2b2b2b73] transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
       >
         {description}
         <div className="text-bubble bg-primary-green absolute right-2 -bottom-5 h-7 w-7"></div>

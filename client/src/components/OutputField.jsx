@@ -38,7 +38,7 @@ function OutputItem({ prompt, deleteOutput }) {
 
   return (
     <>
-      <div className="relative user bg-baloon-user text-dark-green-background mb-4 flex max-w-9/10 flex-col self-end rounded-2xl px-8 py-5">
+      <div className="user bg-baloon-user text-dark-green-background relative mb-4 flex max-w-9/10 flex-col self-end rounded-2xl px-8 py-5">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeSanitize]}
@@ -48,9 +48,11 @@ function OutputItem({ prompt, deleteOutput }) {
         <button
           onClick={handleDeleteOutput}
           disabled={isLoading}
-          className="leading-0 absolute top-0 left-0 -translate-2/5 transition-all duration-150 hover:scale-120 bg-baloon-user hover:bg-white w-[40px] h-[40px] rounded-full cursor-pointer self-start"
+          className="bg-baloon-user absolute top-0 left-0 h-[40px] w-[40px] -translate-2/5 cursor-pointer self-start rounded-full leading-0 transition-all duration-150 hover:scale-120 hover:bg-white"
         >
-          <span className="material-symbols-outlined hover:scale-110 duration-100">delete</span>
+          <span className="material-symbols-outlined duration-100 hover:scale-110">
+            delete
+          </span>
         </button>
       </div>
       <div className="ai bg-baloon-ai text-white-text mb-4 flex max-w-9/10 flex-col self-start rounded-2xl px-8 py-5">
