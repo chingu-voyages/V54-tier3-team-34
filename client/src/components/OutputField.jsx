@@ -48,7 +48,7 @@ function OutputItem({ prompt, deleteOutput }) {
         <button
           onClick={handleDeleteOutput}
           disabled={isLoading}
-          className="leading-0 absolute top-0 left-0 -translate-2/5 hover:bg-white transition-all duration-150 w-[40px] h-[40px] hover:w-[45px] hover:h-[45px] rounded-full text-black bg-baloon-user cursor-pointer self-start"
+          className="leading-0 absolute top-0 left-0 -translate-2/5 transition-all duration-150 hover:scale-120 bg-baloon-user hover:bg-white w-[40px] h-[40px] rounded-full cursor-pointer self-start"
         >
           <span className="material-symbols-outlined hover:scale-110 duration-100">delete</span>
         </button>
