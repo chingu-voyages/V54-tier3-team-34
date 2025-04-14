@@ -48,9 +48,9 @@ function OutputItem({ prompt, deleteOutput }) {
         <button
           onClick={handleDeleteOutput}
           disabled={isLoading}
-          className="bg-baloon-user absolute top-0 left-0 h-[40px] w-[40px] -translate-2/5 cursor-pointer self-start rounded-full leading-0 transition-all duration-150 hover:scale-120 hover:bg-white"
+          className="bg-baloon-ai absolute top-0 left-0 h-[40px] w-[40px] -translate-1/2 cursor-pointer rounded-full leading-0 text-white transition-all duration-150 hover:scale-120 hover:bg-red-500 focus:scale-120 focus:bg-red-500"
         >
-          <span className="material-symbols-outlined duration-100 hover:scale-110">
+          <span className="material-symbols-outlined">
             delete
           </span>
         </button>
