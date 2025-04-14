@@ -20,7 +20,7 @@
   }
 
   .markdown-content .user p:nth-last-child(2),
-  .markdown-content .ai p:nth-last-child(2) {
+  .markdown-content .ai p:last-child {
     margin-bottom: 0;
   }
 
