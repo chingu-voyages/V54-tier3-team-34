@@ -5,10 +5,10 @@ import GenerateButton from "./GenerateButton"
 import ProgressBar from "./ProgressBar"
 import TextArea from "./TextArea"
 import { steps } from "../steps";
-import { generateAnswer } from "../services/ai-agent.js";
+import { addPrompt, createConversation } from "../services/ai-agent.js";
 
 
-export default function Form({ chatHistory, setChatHistory, makeUserMessage }) {
+export default function Form({ conversationHash, setConversationHash, setChatHistory }) {
   const [formData, setFormData] = useState({
     persona: "",
     context: "",
@@ -86,41 +86,45 @@ export default function Form({ chatHistory, setChatHistory, makeUserMessage }) {
       return;
     }
 
-    const userPrompt = makeUserMessage(formData);
-
-    // Add the user's prompt to the chat history immediately
-    setChatHistory((prev) => [...prev, { role: "user", text: userPrompt }]);
-
-    // Add a "Loading..." placeholder to the chat history
-    const loadingMessageIndex = chatHistory.length + 1;
-    setChatHistory((prev) => [...prev, { role: "ai", text: "Loading..." }]);
+    setChatHistory((prev) => [
+      ...prev,
+      {
+        id: Math.floor(Math.random() * 1000),
+        persona: formData.persona,
+        context: formData.context,
+        task: formData.task,
+        format: formData.output,
+        constraint: formData.constraint,
+        answer: "Loading...",
+      }
+    ])
 
     setIsLoading(true);
     try {
-      const { hash, answer } = await generateAnswer(formData); // Fetch AI response
-
-      // update the url
-      window.history.pushState(null, '', hash);
-
-      // Replace the "Loading..." placeholder with the AI's response
-      setChatHistory((prev) =>
-        prev.map((entry, index) =>
-          index === loadingMessageIndex
-            ? { role: "ai", text: answer }
-            : entry,
-        ),
-      );
+      if (!conversationHash) {
+        // create a new conversation
+        const conversation = await createConversation(formData)
+        window.history.pushState(null, '', conversation.hash)
+        
+        setConversationHash(conversation.hash)
+        setChatHistory(conversation.history)
+        return
+      }
+      
+      // otherwise add the prompt to the conversation
+      const prompt = await addPrompt({ conversationHash, ...formData })
+      // replace the client prompt we added with the server's
+      setChatHistory(prev => [...prev.slice(0, prev.length - 1), prompt ])
     } catch (error) {
       console.error("Error fetching AI response:", error);
+      
+      setChatHistory(prev => prev.map((prompt, index) => {
+        if (index === prev.length - 1) {
+          return {...prompt, answer: "**Error:** Unable to fetch response" }
+        }
 
-      // Replace the "Loading..." placeholder with an error message
-      setChatHistory((prev) =>
-        prev.map((entry, index) =>
-          index === loadingMessageIndex
-            ? { role: "ai", text: "**Error:** Unable to fetch response" }
-            : entry,
-        ),
-      );
+        return prompt
+      }))
     } finally {
       setIsLoading(false);
     }
