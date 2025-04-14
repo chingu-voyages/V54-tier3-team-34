@@ -1,33 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-export default function TextArea({title, placeholder, inputValue, handleChange, handleKeyDown }) {
+export default function TextArea({
+  title,
+  description,
+  inputValue,
+  handleChange,
+  handleKeyDown,
+}) {
   const [tooltip, setTooltip] = useState(false);
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    // Focus the textarea whenever the title (current step) changes
+    textareaRef.current?.focus();
+  }, [title]);
 
   return (
     <>
+      {/* textarea */}
       <textarea
-        className="peer field-sizing-content min-h-52 w-full border border-green-500 p-3 pt-8 pb-12 text-green-500 outline-offset-3 valid:pt-2 valid:outline valid:outline-green-500 focus:pt-2 focus:outline focus:outline-green-500"
-        // placeholder={placeholder}
+        ref={textareaRef}
+        className="peer font-paragraph text-primary-green [&::-webkit-scrollbar-track]:bg-dark-green-shade [&::-webkit-scrollbar-thumb]:bg-dark-green-background mt-12 mr-8 mb-4 field-sizing-content max-h-36 min-h-12 resize-none overflow-y-auto rounded-[inherit] pr-2 pl-8 outline-none [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:rounded-full"
         value={inputValue}
         name={title}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         required
-      ></textarea>
-      <div className="absolute top-2 right-2 cursor-pointer text-white" onClick={() => setTooltip(prev => !prev)}>
-        <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-green-500">
-          {!tooltip ? "?" : "X"}
-        </div>
-        <div className={`pointer-events-none absolute right-5 z-100 min-w-[300px] bg-green-500 p-3 text-xs tracking-wider opacity-0 transition-all peer-hover:opacity-100 ${tooltip && "opacity-100"}`}>
-          {placeholder}
-        </div>
-      </div>
+      />
+      {/* label */}
       <label
         htmlFor={title}
-        className="pointer-events-none absolute top-0 left-1 m-2 bg-black px-1 text-green-500 transition-all duration-400 peer-valid:-top-[15px] peer-valid:bg-green-500 peer-valid:text-xs peer-valid:text-white peer-focus:-top-[15px] peer-focus:bg-green-500 peer-focus:text-xs peer-focus:text-white"
+        className="text-primary-green peer-valid:bg-primary-green peer-valid:text-dark-text peer-valid:border-dark-green-background peer-focus:bg-primary-green peer-focus:text-dark-text peer-focus:border-dark-green-background pointer-events-none absolute rounded-lg border-transparent/1 bg-none px-6 py-1 font-normal transition-all duration-300 ease-out peer-valid:-translate-y-3 peer-focus:-translate-y-3"
       >
         {title.slice(0, 1).toUpperCase() + title.slice(1)}
       </label>
+      {/* open/close tooltip*/}
+
+      <div className="peer/tooltip text-dark-text absolute top-2 right-2 cursor-pointer">
+        <button
+          type="button"
+          className={`hover:bg-accent-green flex h-5 w-5 items-center justify-center rounded-full ${tooltip ? "bg-accent-green" : "bg-primary-green"}`}
+          onClick={() => setTooltip((prev) => !prev)}
+        >
+          {!tooltip ? "?" : "X"}
+        </button>
+      </div>
+      {/* tooltip */}
+      <div
+        className={`font-paragraph bg-primary-green pointer-events-none absolute right-3 bottom-46 z-100 min-h-18 rounded-2xl p-6 tracking-wider opacity-0 shadow-xl shadow-[#2b2b2b73] transition-all peer-hover/tooltip:opacity-100 ${tooltip && "opacity-100"}`}
+      >
+        {description}
+        <div className="text-bubble bg-primary-green absolute right-2 -bottom-5 h-7 w-7"></div>
+      </div>
     </>
   );
 }
