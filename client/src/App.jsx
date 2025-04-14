@@ -3,13 +3,13 @@ import { useEffect, useState, useRef } from "react";
 import AppExplanation from "./components/AppExplanation";
 import Header from "./components/Header";
 import OutputField from "./components/OutputField";
-import Form from './components/Form'
+import Form from "./components/Form";
 import Footer from "./components/Footer";
 import { getConversation, deletePrompt } from "./services/ai-agent.js";
 
 export default function App() {
   const [explanationOpen, setExplanationOpen] = useState(false);
-  const [conversationHash, setConversationHash] = useState("")
+  const [conversationHash, setConversationHash] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
   const scroller = useRef(null);
@@ -30,8 +30,8 @@ export default function App() {
 
     getConversation({ hash })
       .then(({ hash, history }) => {
-        setConversationHash(hash)
-        setChatHistory(history)
+        setConversationHash(hash);
+        setChatHistory(history);
       })
       .catch((error) => {
         if (error.cause.responseStatus == 404) {
@@ -42,10 +42,10 @@ export default function App() {
 
   async function deleteOutput({ promptId }) {
     try {
-      await deletePrompt({ conversationHash, promptId })
+      await deletePrompt({ conversationHash, promptId });
 
-      setChatHistory((prev) => prev.filter(prompt => prompt.id !== promptId ))
-    } catch(error) {
+      setChatHistory((prev) => prev.filter((prompt) => prompt.id !== promptId));
+    } catch (error) {
       console.error("Error deleting prompt:", error);
     }
   }
@@ -60,7 +60,11 @@ export default function App() {
 
       <div className="border-primary-green flex w-full max-w-[1000px] flex-1 flex-col justify-end md:w-3xl">
         <OutputField chatHistory={chatHistory} deleteOutput={deleteOutput} />
-        <Form conversationHash={conversationHash} setConversationHash={setConversationHash} setChatHistory={setChatHistory} />
+        <Form
+          conversationHash={conversationHash}
+          setConversationHash={setConversationHash}
+          setChatHistory={setChatHistory}
+        />
         {/* self-closing div to implement auto-scrolling  */}
         <div ref={scroller} />
       </div>

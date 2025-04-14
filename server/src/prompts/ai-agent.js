@@ -34,5 +34,5 @@ function getPromptText({ constraint, context, format, persona, task }) {
     `  persona: ${persona}\n` +
     `  task: ${task}\n` +
     `}`
-);
+  );
 }

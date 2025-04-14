@@ -25,7 +25,7 @@ export default function ProgressBar({
   };
 
   return (
-    <div  className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div className="text-primary-green flex w-full items-center justify-center gap-5 text-5xl">
         <button
           className={`hover:text-white-text cursor-pointer text-4xl ${!stepNumber && "invisible"}`}
@@ -40,14 +40,18 @@ export default function ProgressBar({
             return (
               <button
                 key={i}
-                className="-translate-y-1 duration-300 relative text-accent-green cursor-pointer text-5xl hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                className="text-accent-green relative -translate-y-1 cursor-pointer text-5xl duration-300 hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"
                 onClick={() => handleClick(i)}
                 tabIndex={0}
               >
-                {formData[step.name] ? <div className="text-accent-green absolute z-0">⬟</div> : null }
+                {formData[step.name] ? (
+                  <div className="text-accent-green absolute z-0">⬟</div>
+                ) : null}
                 <div className="relative z-10">⬠</div>
                 {/* <div className="absolute top-[10px] left-[8px] text-xs font-bold text-white-text"> */}
-                <div className={`absolute top-[16px] left-[17px] text-xs font-bold z-50 ${formData[step.name] ? "text-dark-green-shade" : "text-accent-green"}`}>
+                <div
+                  className={`absolute top-[16px] left-[17px] z-50 text-xs font-bold ${formData[step.name] ? "text-dark-green-shade" : "text-accent-green"}`}
+                >
                   {i + 1}
                 </div>
               </button>
@@ -62,7 +66,7 @@ export default function ProgressBar({
                 tabIndex={0}
               >
                 <div className="text-primary-green-darker-shade">⬟</div>
-                <div className="text-dark-text absolute top-[16px] left-[17px] text-xs font-bold z-50">
+                <div className="text-dark-text absolute top-[16px] left-[17px] z-50 text-xs font-bold">
                   {i + 1}
                 </div>
               </button>
@@ -81,7 +85,9 @@ export default function ProgressBar({
                 >
                   ⬠
                 </div>
-                <div className={`${errorMessages?.[step.name] ? "text-red-500" : "text-primary-green"} absolute top-[16px] left-[17px] text-xs opacity-100 group-hover:opacity-100 z-50`}>
+                <div
+                  className={`${errorMessages?.[step.name] ? "text-red-500" : "text-primary-green"} absolute top-[16px] left-[17px] z-50 text-xs opacity-100 group-hover:opacity-100`}
+                >
                   {i + 1}
                 </div>
               </button>
@@ -100,7 +106,6 @@ export default function ProgressBar({
           <div>{error}</div>
         ))}
       </div>
-
     </div>
   );
 }
